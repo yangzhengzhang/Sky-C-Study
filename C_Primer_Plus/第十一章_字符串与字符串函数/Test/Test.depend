@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1399036814 source:e:\编程\c\c primer plus\第十一章 字符串与字符串函数\sort_str.c
+	<stdio.h>
+	<string.h>
+
+1400309028 source:e:\编程\c\other\test3.c
+	<stdio.h>
+	<string.h>
+

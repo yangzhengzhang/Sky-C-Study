@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1401526050 source:e:\±à³Ì\c\oj\guestlist.c
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1402406493 source:e:\±à³Ì\c\oj\1.c
+	<stdio.h>
+

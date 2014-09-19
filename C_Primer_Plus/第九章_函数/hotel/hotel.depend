@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1395835384 source:e:\编程\c\c primer plus\第九章 函数\hotel.c
+	<stdio.h>
+	"hotel.h"
+
+1395835402 e:\编程\c\c primer plus\第九章 函数\hotel.h
+
+1395758867 source:e:\编程\c\c primer plus\第九章 函数\usehotel.c
+	<stdio.h>
+	"hotel.h"
+
