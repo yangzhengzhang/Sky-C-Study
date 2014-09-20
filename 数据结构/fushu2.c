@@ -68,17 +68,14 @@ int input(complex *num1) {
             counter = 0;
             point = 0;
             pcounter = 0;
-            continue;
         } else if (c == '-') {
             digitmode = 0;
             minus = 1;
-            continue;
         /* 读入小数点开始小数点模式 */
         } else if (c == '.') {
             digitmode = 1;
             point = 1;
             pcounter = 0;
-            continue;
         /* 小数点模式数据处理 */
         } else if (isdigit(c) && point) {
             digitmode = 1;
@@ -105,7 +102,7 @@ int input(complex *num1) {
     fflush(stdin);
 
     if (ipart == 0 && rpart == 0) {
-        printf("发生错误，无法识别的内容或者未输入正确格式， 请尝试重新输入\n");
+        printf("发生错误，识别不能，重新输入看看\n");
         return 1;
     } else if (ipart == 0 && rpart == 1) {
         num1->ipart = 0;
@@ -170,44 +167,56 @@ void output(complex num3)
 
 int main(void)
 {
-
-
     complex num1, num2, num3;
     char c;
+    int state;
     printf("天家的复数计算器 V2.0\n");
-    printf("请输入你要进行的操作 w.输入 q.退出\n");
+    printf("按下键盘上的按键来操作吧（菜单全都区分大小写呢~）! \n\tIt's the beginning. w.输入 h.帮助及关于 q.退出\n");
     while (c = getchar()) {
         fflush(stdin);
         if (c == 'w') {
-            printf("请输入你要进行操作的两个复数\n（a b可省略，可识别匹配，把虚数写在前面也可以哟~）\n");
+            printf("输入两个复数咯~a+bi,b+ai都行，手滑打错也行！我会努力看懂的！\n");
+            state = 0;
             do {
+                if (state == 1) {
+                    printf("对不起我会好好加油的！请再次努力的调教我吧\n");
+                }
                 fflush(stdin);
                 while (input(&num1));
-                printf("根据智能识别系统，请确认结果：");
+                printf("唔，我觉得吧，你是想要说这个吧？：");
                 output(num1);
-                printf("按y或回车确认，其他重新输入：");
+                printf("按y或回车确认，按其他键重新输入：");
+                state = 1;
             } while ((c = getchar()) != 'y' && c != '\n');
 
-            printf("成功录入第一个数，接下来开始录入第二个吧\n");
+            printf("机智的我，接下来开始录入第二个吧\n");
 
+            state = 0;
             fflush(stdin);
             do {
+                if (state == 1) {
+                    printf("对不起我会好好加油的！请再次努力的调教我吧\n");
+                }
                 fflush(stdin);
                 while (input(&num2));
-                printf("根据智能识别系统，请确认结果：");
+                printf("所以这次你想输入的数字是这个咯？：");
                 output(num2);
-                printf("按y或回车确认，其他重新输入：");
+                printf("按y或回车确认，按其他键重新输入：");
             } while ((c = getchar()) != 'y' && c != '\n');
             printf("成功录入第二个数，接下来算吧\n");
 
+        } else if (c == 'h') {
+            printf("改啊改啊改，终于我还是重写了，这也真是醉了。。。讲完了\n\n");
+            printf("按下键盘上的按键来操作吧（菜单全都区分大小写呢~）\n\t! It's the beginning. w.输入 h.帮助及关于 q.退出\n");
+            continue;
         } else if (c == 'q') {
             break;
         } else {
-            printf("指令无法识别，请重试\n");
+            printf("你在说什么，我听不懂\n");
             continue;
         }
         fflush(stdin);
-        printf("请输入需要进行的操作（用小写字母表示）：\n\ta.加法, b.减法, c.乘法, d.除法, r.返回上一级（退出或重新输入）\n");
+        printf("又到了按键的时候了！（区分大小写）：\n\ta.加法, b.减法, c.乘法, d.除法, r.返回上一级（退出或重新输入）\n");
         while (c = getchar()) {
             fflush(stdin);
             if (c == 'a') {
@@ -226,18 +235,19 @@ int main(void)
                 }
                 printf("除法 ");
             } else if (c == 'r') {
-                printf("请输入你要进行的操作 w.输入 q.退出\n");
+                printf("按下键盘上的按键来操作吧（菜单全都区分大小写呢~）\n\t! It's the beginning. w.输入 h.帮助及关于 q.退出\n");
                 break;
             } else {
                 printf("输入错误，请重新输入\n");
                 continue;
             }
-            printf("结果： ");
+            printf("我帮你算的结果： ");
             output(num3);
         }
     }
 
-    printf("感谢使用，下次再见~\n");
+    printf("感谢使用，下次再见~再敲一下键盘我就走啦");
+    getchar();
 /*
     input(&num1);
     input(&num2);
