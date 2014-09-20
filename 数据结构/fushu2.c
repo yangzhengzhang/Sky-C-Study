@@ -53,6 +53,18 @@ int input(complex *num1) {
                 minus = 0;
                 point = 0;
                 pcounter = 0;
+            } else if(rpart == 1 && ipart == 0 && (counter != 0 || pcounter != 0)) {
+                if (minus) {
+                    num1->ipart = -num;
+                } else {
+                    num1->ipart = num;
+                }
+                ipart = 1;
+                num = 0;
+                counter = 0;
+                minus = 0;
+                point = 0;
+                pcounter = 0;
             }
         /* 读入负号开启负号模式 */
         } else if (c == '-' && digitmode == 1) {
