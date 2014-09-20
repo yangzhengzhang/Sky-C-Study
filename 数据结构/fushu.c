@@ -8,7 +8,7 @@ typedef struct
     float ipart;
 } complex;
 
-void input(complex *num1, complex *num2)
+void input(complex *num1)
 {
     float a, b, c, d;
     while(1) {
@@ -83,78 +83,6 @@ void input(complex *num1, complex *num2)
     }
 
     fflush(stdin);
-
-    while(1) {
-        if (scanf("%f", &a) == 0) {
-            if (getchar() == 'i') {
-                num2->ipart = 1;
-                num2->rpart = 0;
-                fflush(stdin);
-                break;
-            } else {
-                printf("未按正确复数格式输入，请重试\n");
-                fflush(stdin);
-                continue;
-            }
-        } else {
-            if ((c = getchar()) == '+') {
-                num2->rpart = a;
-                if (scanf("%f", &a) == 0) {
-                    if (getchar() == 'i') {
-                        num2->ipart = 1;
-                        fflush(stdin);
-                        break;
-                    } else {
-                        printf("未按正确复数格式输入，请重试\n");
-                        continue;
-                    }
-                } else {
-                    if (getchar() == 'i') {
-                        num2->ipart = a;
-                        fflush(stdin);
-                    } else {
-                        printf("未按正确复数格式输入，请重试\n");
-                        fflush(stdin);
-                        continue;
-                    }
-                }
-                fflush(stdin);
-            } else if (c == '-') {
-                num2->rpart = a;
-                if (scanf("%f", &a) == 0) {
-                    if (getchar() == 'i') {
-                        num2->ipart = -1;
-                        fflush(stdin);
-                        break;
-                    } else {
-                        printf("未按正确复数格式输入，请重试\n");
-                        continue;
-                    }
-                } else {
-                    if (getchar() == 'i') {
-                        num2->ipart = -a;
-                        fflush(stdin);
-                    } else {
-                        printf("未按正确复数格式输入，请重试\n");
-                        fflush(stdin);
-                        continue;
-                    }
-                }
-                fflush(stdin);
-            } else if (c == 'i') {
-                num2->ipart = a;
-                num2->rpart = 0;
-            } else if (c == '\n'){
-                num2->rpart = a;
-                num2->ipart = 0;
-            } else {
-                printf("未按正确复数格式输入，请重试\n");
-                continue;
-            }
-        }
-        break;
-    }
-    fflush(stdin);
 }
 
 void plus(complex num1, complex num2, complex *num3)
@@ -219,7 +147,9 @@ int main(void)
         fflush(stdin);
         if (c == 'w') {
             printf("请输入你要进行操作的两个复数（暂时只支持a+bi的形式，a b可省略）\n");
-            input(&num1, &num2);
+            input(&num1);
+            input(&num2);
+
         } else if (c == 'q') {
             break;
         } else {
