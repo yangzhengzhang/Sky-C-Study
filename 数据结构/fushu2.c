@@ -2,6 +2,12 @@
 #include <ctype.h>
 /*
     实现思路：读取每一个字符进行状态改变，把char转换为int识别和提取出数字的部分，识别效果看人品，就是抄在实验报告上心好累。
+    测试数据：
+        2+3i / 2+i
+        i+2 / 2i+2
+        2+3o
+        fasdr2+rweraweirwe
+        arewartgsd
 */
 typedef struct
 {
