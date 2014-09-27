@@ -6,7 +6,7 @@ void in_quote(int c);
 void in_comment(void);
 void search(int c);
 
-/* CÓïÑÔ³ÌĞò³õ²½µÄÓï·¨¼ì²é */
+/* Cè¯­è¨€ç¨‹åºåˆæ­¥çš„è¯­æ³•æ£€æŸ¥ */
 main(void)
 {
     int c;
@@ -15,26 +15,26 @@ main(void)
     while ((c = getchar()) != EOF) {
         if (c == '/') {
             if ((c = getchar()) == '*')
-                in_comment();   /* ÆÀÂÛÄÚ */
+                in_comment();   /* è¯„è®ºå†… */
             else
                 search(c);
         } else if (c == '\'' || c == '"')
-            in_quote(c);    /* ÒıÓÃÄÚ */
+            in_quote(c);    /* å¼•ç”¨å†… */
         else
             search(c);
 
-        if (brace < 0) {    /* Êä³ö´íÎó */
-            printf("Unbalanced braces\n");  /* ´óÀ¨ºÅ */
+        if (brace < 0) {    /* è¾“å‡ºé”™è¯¯ */
+            printf("Unbalanced braces\n");  /* å¤§æ‹¬å· */
             brace = 0;
         } else if (brack < 0) {
-            printf("Unbalanced brackets\n");    /* ·½À¨ºÅ */
+            printf("Unbalanced brackets\n");    /* æ–¹æ‹¬å· */
             brack = 0;
         } else if (paren < 0) {
-            printf("Unbalanced parentheses\n"); /* Ô²À¨ºÅ */
+            printf("Unbalanced parentheses\n"); /* åœ†æ‹¬å· */
             paren = 0;
         }
     }
-    if (brace > 0)  /* Êä³ö´íÎó */
+    if (brace > 0)  /* è¾“å‡ºé”™è¯¯ */
         printf("Unbalanced braces\n");
     if (brack > 0)
         printf("Unbalanced brackets\n");
@@ -42,7 +42,7 @@ main(void)
         printf("Unbalanced parenthess\n");
 }
 
-/* searchº¯Êı£ºËÑË÷Ò»¸ö»ù±¾Óï·¨´íÎó */
+/* searchå‡½æ•°ï¼šæœç´¢ä¸€ä¸ªåŸºæœ¬è¯­æ³•é”™è¯¯ */
 void search(int c)
 {
     extern int brace, brack, paren;
@@ -61,25 +61,25 @@ void search(int c)
         --paren;
 }
 
-/* in_commentº¯Êı£ºÔÚÒ»¸öÓĞĞ§µÄ×¢ÊÍÄÚ */
+/* in_commentå‡½æ•°ï¼šåœ¨ä¸€ä¸ªæœ‰æ•ˆçš„æ³¨é‡Šå†… */
 void in_comment(void)
 {
     int c, d;
 
-    c = getchar();  /* ÉÏÒ»¸ö×Ö·û */
-    d = getchar();  /* Ä¿Ç°µÄ×Ö·û */
-    while (c != '*' || d != '/') {  /* ËÑË÷½áÊø±êÖ¾ */
+    c = getchar();  /* ä¸Šä¸€ä¸ªå­—ç¬¦ */
+    d = getchar();  /* ç›®å‰çš„å­—ç¬¦ */
+    while (c != '*' || d != '/') {  /* æœç´¢ç»“æŸæ ‡å¿— */
         c = d;
         d = getchar();
     }
 }
 
-/* ÔÚÒıÓÃÄÚ */
+/* åœ¨å¼•ç”¨å†… */
 void in_quote(int c)
 {
     int d;
 
-    while ((d = getchar()) != c) {  /* ËÑË÷½áÊø±êÖ¾ */
+    while ((d = getchar()) != c) {  /* æœç´¢ç»“æŸæ ‡å¿— */
         if (d == '\\')
             getchar();
     }

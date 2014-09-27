@@ -15,7 +15,7 @@ int main(void)
 {
     int n;
     double (*p)(double), sum;
-    printf("求sin积分请按1,cos请按2,exp请按3");
+    printf("姹俿in绉垎璇锋寜1,cos璇锋寜2,exp璇锋寜3");
     scanf("%d", &n);
 
     switch(n)

@@ -6,7 +6,7 @@ int main(void)
 {
     int num, array[50];
 
-    printf("ÇëÊäÈëÒ»¸öÊı£º ");
+    printf("è¯·è¾“å…¥ä¸€ä¸ªæ•°ï¼š ");
     scanf("%d", &num);
     printf("%d = ", num);
     Prime(num);

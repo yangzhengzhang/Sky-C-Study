@@ -1,23 +1,23 @@
 #include <stdio.h>
 
-float max(float a, float b, float c);   /* ¶¨ÒåÒ»¸öº¯Êý */
+float max(float a, float b, float c);   /* å®šä¹‰ä¸€ä¸ªå‡½æ•° */
 
 int main(void)
 {
-    float a, b, c;  /* ÉùÃ÷¸¡µãÐÍÊý¾Ý */
+    float a, b, c;  /* å£°æ˜Žæµ®ç‚¹åž‹æ•°æ® */
 
     printf("In the program you should input three numbers:\n");
     printf("Print the first number:");
-    scanf("%f", &a);    /* »ñÈ¡µÚÒ»¸öÊý */
+    scanf("%f", &a);    /* èŽ·å–ç¬¬ä¸€ä¸ªæ•° */
     printf("Print the second number:");
-    scanf("%f", &b);    /* »ñÈ¡µÚ¶þ¸öÊý */
+    scanf("%f", &b);    /* èŽ·å–ç¬¬äºŒä¸ªæ•° */
     printf("Print the third number:");
-    scanf("%f", &c);    /* »ñÈ¡µÚÈý¸öÊý */
+    scanf("%f", &c);    /* èŽ·å–ç¬¬ä¸‰ä¸ªæ•° */
     printf("The max number is %.2f.", max(a, b, c));
     return 0;
 
 }
-/* maxº¯Êý±È½Ï´óÐ¡ */
+/* maxå‡½æ•°æ¯”è¾ƒå¤§å° */
 float max(float a, float b, float c)
 {
     float max;
@@ -26,5 +26,5 @@ float max(float a, float b, float c)
         max = b;
     if (c > max)
         max = c;
-    return max;     /* ·µ»Ø×î´óÖµ */
+    return max;     /* è¿”å›žæœ€å¤§å€¼ */
 }

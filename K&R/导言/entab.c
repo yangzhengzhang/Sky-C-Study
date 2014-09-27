@@ -1,13 +1,13 @@
 #include <stdio.h>
 
-#define TABINC 8    // Éè¶¨Ã¿°Ë¸ö³öÏÖÖÆ±í·û
+#define TABINC 8    // è®¾å®šæ¯å…«ä¸ªå‡ºç°åˆ¶è¡¨ç¬¦
 
 main(void)
 {
     int c, nb, nt, pos;
 
-    nb = 0;         // ĞèÒªµÄ¿Õ°×
-    nt = 0;         // ĞèÒªµÄÖÆ±í·û
+    nb = 0;         // éœ€è¦çš„ç©ºç™½
+    nt = 0;         // éœ€è¦çš„åˆ¶è¡¨ç¬¦
     for (pos = 1; (c = getchar()) != EOF; ++pos)
         if (c == ' ') {
             if (pos % TABINC != 0)

@@ -26,7 +26,7 @@ int put2(const char * string)
         putchar(*string++);
         count++;
     }
-    putchar('\n');      /* 换行符不统计在内 */
+    putchar('\n');      /* 鎹㈣绗︿笉缁熻鍦ㄥ唴 */
 
     return count;
 }

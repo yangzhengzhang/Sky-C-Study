@@ -2,7 +2,7 @@
 
 int power(int m, int n);
 
-/* 测试power函数 */
+/* 娴嬭瘯power鍑芥暟 */
 
 main(void)
 {
@@ -13,7 +13,7 @@ main(void)
     return 0;
 }
 
-/* power 函数 求底数的 n 次幂 */
+/* power 鍑芥暟 姹傚簳鏁扮殑 n 娆″箓 */
 int power(int base, int n)
 {
     int i, p;

@@ -16,6 +16,6 @@ int main(void)
     else if (score >= 0 && score <= 64)
         printf("Your grade is D");
     else
-        printf("Wrong score£¡");
+        printf("Wrong scoreï¼");
     return 0;
 }

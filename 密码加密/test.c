@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     MD5Init(&md5);
     MD5Update(&md5,encrypt,strlen((char *)encrypt));
     MD5Final(&md5,decrypt);
-    printf("¼ÓÃÜÇ°:%s\n¼ÓÃÜºó:",encrypt);
+    printf("åŠ å¯†å‰:%s\nåŠ å¯†å:",encrypt);
     for(i=0;i<16;i++)
     {
         printf("%02x",decrypt[i]);

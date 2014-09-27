@@ -5,7 +5,7 @@ int main(void)
     char str[100], *p, *q;
     int a[80] = {0}, i, j, counter, *num, bits, temp;
 
-    /* ³õÊ¼»¯¼ÆÊýÆ÷ÓëÎ»Êý¼ÆÊýÆ÷ */
+    /* åˆå§‹åŒ–è®¡æ•°å™¨ä¸Žä½æ•°è®¡æ•°å™¨ */
     counter = 0;
     bits = 0;
 
@@ -18,7 +18,7 @@ int main(void)
         if (*p >= '0' && *p <= '9')
             bits++;
         else if (bits == 0)
-            q++;    /* Ìø¹ýÁ¬ÐøµÄ×ÖÄ¸ */
+            q++;    /* è·³è¿‡è¿žç»­çš„å­—æ¯ */
         else
         {
             while (1)
@@ -32,9 +32,9 @@ int main(void)
                 if (bits == 1)
                 {
                     num++;
-                    bits--;     /* Î»Êý¹éÁã */
+                    bits--;     /* ä½æ•°å½’é›¶ */
                     counter++;
-                    q++;    /* ÓëÏÂÒ»´ÎpÖ¸ÕëÍ¬²½ */
+                    q++;    /* ä¸Žä¸‹ä¸€æ¬¡pæŒ‡é’ˆåŒæ­¥ */
                     break;
                 }
                 bits--;

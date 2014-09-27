@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <ctype.h>
 /*
-    ÊµÏÖË¼Â·£º¶ÁÈ¡Ã¿Ò»¸ö×Ö·û½øĞĞ×´Ì¬¸Ä±ä£¬°Ñchar×ª»»ÎªintÊ¶±ğºÍÌáÈ¡³öÊı×ÖµÄ²¿·Ö£¬Ê¶±ğĞ§¹û¿´ÈËÆ·£¬¾ÍÊÇ³­ÔÚÊµÑé±¨¸æÉÏĞÄºÃÀÛ¡£
-    ²âÊÔÊı¾İ£º
+    å®ç°æ€è·¯ï¼šè¯»å–æ¯ä¸€ä¸ªå­—ç¬¦è¿›è¡ŒçŠ¶æ€æ”¹å˜ï¼ŒæŠŠcharè½¬æ¢ä¸ºintè¯†åˆ«å’Œæå–å‡ºæ•°å­—çš„éƒ¨åˆ†ï¼Œè¯†åˆ«æ•ˆæœçœ‹äººå“ï¼Œå°±æ˜¯æŠ„åœ¨å®éªŒæŠ¥å‘Šä¸Šå¿ƒå¥½ç´¯ã€‚
+    æµ‹è¯•æ•°æ®ï¼š
         2+3i / 2+i
         i+2 / 2i+2
         2+3o
@@ -20,10 +20,10 @@ int input(complex *num1) {
     float num = 0, thatone;
     int digitmode = 0, counter = 0, minus = 0, rpart = 0, ipart = 0, point = 0, i, thisone, pcounter = 0;
     while (c = getchar()) {
-        /* ½á¹û´¢´æ²¿·Ö */
+        /* ç»“æœå‚¨å­˜éƒ¨åˆ† */
         if (!isdigit(c) && c != '-' && c != '.') {
             digitmode = 0;
-            if (c == 'i' && !ipart && !counter && !pcounter) {   // ¼ì²âÎªĞéÊı Ğé²¿Î´ÊäÈë
+            if (c == 'i' && !ipart && !counter && !pcounter) {   // æ£€æµ‹ä¸ºè™šæ•° è™šéƒ¨æœªè¾“å…¥
                 if (minus) {
                     num1->ipart = -1;
                 } else {
@@ -31,7 +31,7 @@ int input(complex *num1) {
                 }
                 ipart = 1;
                 point = minus = counter = pcounter = num = 0;
-            } else if (c == 'i' && !ipart && (counter || pcounter))  {    // Ç°Ãæ¼ì²âµ½Êı×Ö Ğé²¿Î´ÊäÈë
+            } else if (c == 'i' && !ipart && (counter || pcounter))  {    // å‰é¢æ£€æµ‹åˆ°æ•°å­— è™šéƒ¨æœªè¾“å…¥
                 if (minus) {
                     num1->ipart = -num;
                 } else {
@@ -39,7 +39,7 @@ int input(complex *num1) {
                 }
                 ipart = 1;
                 num = point = minus = pcounter = counter = 0;
-            } else if (c != 'i' && !rpart && (counter || pcounter)) {    // ¼ì²âÎªÊµÊı Êµ²¿Î´ÊäÈë ÒÑ¾­¼ì²âµ½Ç°ÃæµÄÊı¾İ
+            } else if (c != 'i' && !rpart && (counter || pcounter)) {    // æ£€æµ‹ä¸ºå®æ•° å®éƒ¨æœªè¾“å…¥ å·²ç»æ£€æµ‹åˆ°å‰é¢çš„æ•°æ®
                 if (minus) {
                     num1->rpart = -num;
                 } else {
@@ -56,7 +56,7 @@ int input(complex *num1) {
                 ipart = 1;
                 num = counter = minus = point = pcounter = 0;
             }
-        /* ¶ÁÈë¸ººÅ¿ªÆô¸ººÅÄ£Ê½ */
+        /* è¯»å…¥è´Ÿå·å¼€å¯è´Ÿå·æ¨¡å¼ */
         } else if (c == '-' && digitmode) {
             if (minus) {
                 num1->rpart = -num;
@@ -68,11 +68,11 @@ int input(complex *num1) {
         } else if (c == '-') {
             digitmode = 0;
             minus = 1;
-        /* ¶ÁÈëĞ¡Êıµã¿ªÊ¼Ğ¡ÊıµãÄ£Ê½ */
+        /* è¯»å…¥å°æ•°ç‚¹å¼€å§‹å°æ•°ç‚¹æ¨¡å¼ */
         } else if (c == '.') {
             digitmode = point = 1;
             pcounter = 0;
-        /* Ğ¡ÊıµãÄ£Ê½Êı¾İ´¦Àí */
+        /* å°æ•°ç‚¹æ¨¡å¼æ•°æ®å¤„ç† */
         } else if (isdigit(c) && point) {
             digitmode = 1;
             pcounter++;
@@ -98,7 +98,7 @@ int input(complex *num1) {
     fflush(stdin);
 
     if (!ipart && !rpart) {
-        printf("·¢Éú´íÎó£¬Ê¶±ğ²»ÄÜ£¬ÖØĞÂÊäÈë¿´¿´\n");
+        printf("å‘ç”Ÿé”™è¯¯ï¼Œè¯†åˆ«ä¸èƒ½ï¼Œé‡æ–°è¾“å…¥çœ‹çœ‹\n");
         return 1;
     } else if (!ipart && rpart) {
         num1->ipart = 0;
@@ -151,11 +151,11 @@ void output(complex num3)
     } else if (num3.ipart == -1 && !num3.rpart) {
         printf("-i\n");
     } else if (!num3.ipart) {
-        printf("%g\n", num3.rpart); // Ğé²¿Îª0 ²»ÏÔÊ¾
+        printf("%g\n", num3.rpart); // è™šéƒ¨ä¸º0 ä¸æ˜¾ç¤º
     } else if (!num3.rpart) {
-        printf("%gi\n", num3.ipart);    // Êµ²¿Îª0 ²»ÏÔÊ¾
+        printf("%gi\n", num3.ipart);    // å®éƒ¨ä¸º0 ä¸æ˜¾ç¤º
     } else if (num3.ipart > 0) {
-        printf("%g+%gi\n", num3.rpart, num3.ipart); // Ğé²¿´óÓÚ0 ÊÖ¶¯Ôö¼Ó¼ÓºÅ
+        printf("%g+%gi\n", num3.rpart, num3.ipart); // è™šéƒ¨å¤§äº0 æ‰‹åŠ¨å¢åŠ åŠ å·
     } else {
         printf("%g%gi\n", num3.rpart, num3.ipart);
     }
@@ -166,83 +166,83 @@ int main(void)
     complex num1, num2, num3;
     char c;
     int state;
-    printf("Ìì¼ÒµÄ¸´Êı¼ÆËãÆ÷ V2.0\n");
-    printf("°´ÏÂ¼üÅÌÉÏµÄ°´¼üÀ´²Ù×÷°É£¨²Ëµ¥È«¶¼Çø·Ö´óĞ¡Ğ´ÄØ~£©! \n\tIt's the beginning. w.ÊäÈë h.°ïÖú¼°¹ØÓÚ q.ÍË³ö\n");
+    printf("å¤©å®¶çš„å¤æ•°è®¡ç®—å™¨ V2.0\n");
+    printf("æŒ‰ä¸‹é”®ç›˜ä¸Šçš„æŒ‰é”®æ¥æ“ä½œå§ï¼ˆèœå•å…¨éƒ½åŒºåˆ†å¤§å°å†™å‘¢~ï¼‰! \n\tIt's the beginning. w.è¾“å…¥ h.å¸®åŠ©åŠå…³äº q.é€€å‡º\n");
     while (c = getchar()) {
         fflush(stdin);
         if (c == 'w') {
-            printf("ÊäÈëÁ½¸ö¸´Êı¿©~a+bi,b+ai¶¼ĞĞ£¬ÊÖ»¬´ò´íÒ²ĞĞ£¡ÎÒ»áÅ¬Á¦¿´¶®µÄ£¡\n");
+            printf("è¾“å…¥ä¸¤ä¸ªå¤æ•°å’¯~a+bi,b+aiéƒ½è¡Œï¼Œæ‰‹æ»‘æ‰“é”™ä¹Ÿè¡Œï¼æˆ‘ä¼šåŠªåŠ›çœ‹æ‡‚çš„ï¼\n");
             state = 0;
             do {
                 if (state) {
-                    printf("¶Ô²»ÆğÎÒ»áºÃºÃ¼ÓÓÍµÄ£¡ÇëÔÙ´ÎÅ¬Á¦µÄµ÷½ÌÎÒ°É\n");
+                    printf("å¯¹ä¸èµ·æˆ‘ä¼šå¥½å¥½åŠ æ²¹çš„ï¼è¯·å†æ¬¡åŠªåŠ›çš„è°ƒæ•™æˆ‘å§\n");
                 }
                 fflush(stdin);
                 while (input(&num1));
-                printf("ßí£¬ÎÒ¾õµÃ°É£¬ÄãÊÇÏëÒªËµÕâ¸ö°É£¿£º");
+                printf("å””ï¼Œæˆ‘è§‰å¾—å§ï¼Œä½ æ˜¯æƒ³è¦è¯´è¿™ä¸ªå§ï¼Ÿï¼š");
                 output(num1);
-                printf("°´y»ò»Ø³µÈ·ÈÏ£¬°´ÆäËû¼üÖØĞÂÊäÈë£º");
+                printf("æŒ‰yæˆ–å›è½¦ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®é‡æ–°è¾“å…¥ï¼š");
                 state = 1;
             } while ((c = getchar()) != 'y' && c != '\n');
 
-            printf("»úÖÇµÄÎÒ£¬½ÓÏÂÀ´¿ªÊ¼Â¼ÈëµÚ¶ş¸ö°É\n");
+            printf("æœºæ™ºçš„æˆ‘ï¼Œæ¥ä¸‹æ¥å¼€å§‹å½•å…¥ç¬¬äºŒä¸ªå§\n");
 
             state = 0;
             fflush(stdin);
             do {
                 if (state) {
-                    printf("¶Ô²»ÆğÎÒ»áºÃºÃ¼ÓÓÍµÄ£¡ÇëÔÙ´ÎÅ¬Á¦µÄµ÷½ÌÎÒ°É\n");
+                    printf("å¯¹ä¸èµ·æˆ‘ä¼šå¥½å¥½åŠ æ²¹çš„ï¼è¯·å†æ¬¡åŠªåŠ›çš„è°ƒæ•™æˆ‘å§\n");
                 }
                 fflush(stdin);
                 while (input(&num2));
-                printf("ËùÒÔÕâ´ÎÄãÏëÊäÈëµÄÊı×ÖÊÇÕâ¸ö¿©£¿£º");
+                printf("æ‰€ä»¥è¿™æ¬¡ä½ æƒ³è¾“å…¥çš„æ•°å­—æ˜¯è¿™ä¸ªå’¯ï¼Ÿï¼š");
                 output(num2);
-                printf("°´y»ò»Ø³µÈ·ÈÏ£¬°´ÆäËû¼üÖØĞÂÊäÈë£º");
+                printf("æŒ‰yæˆ–å›è½¦ç¡®è®¤ï¼ŒæŒ‰å…¶ä»–é”®é‡æ–°è¾“å…¥ï¼š");
             } while ((c = getchar()) != 'y' && c != '\n');
-            printf("³É¹¦Â¼ÈëµÚ¶ş¸öÊı£¬½ÓÏÂÀ´Ëã°É\n");
+            printf("æˆåŠŸå½•å…¥ç¬¬äºŒä¸ªæ•°ï¼Œæ¥ä¸‹æ¥ç®—å§\n");
 
         } else if (c == 'h') {
-            printf("¸Ä°¡¸Ä°¡¸Ä£¬ÖÕÓÚÎÒ»¹ÊÇÖØĞ´ÁË£¬ÕâÒ²ÕæÊÇ×íÁË¡£¡£¡£½²ÍêÁË\n\n");
-            printf("°´ÏÂ¼üÅÌÉÏµÄ°´¼üÀ´²Ù×÷°É£¨²Ëµ¥È«¶¼Çø·Ö´óĞ¡Ğ´ÄØ~£©\n\t! It's the beginning. w.ÊäÈë h.°ïÖú¼°¹ØÓÚ q.ÍË³ö\n");
+            printf("æ”¹å•Šæ”¹å•Šæ”¹ï¼Œç»ˆäºæˆ‘è¿˜æ˜¯é‡å†™äº†ï¼Œè¿™ä¹ŸçœŸæ˜¯é†‰äº†ã€‚ã€‚ã€‚è®²å®Œäº†\n\n");
+            printf("æŒ‰ä¸‹é”®ç›˜ä¸Šçš„æŒ‰é”®æ¥æ“ä½œå§ï¼ˆèœå•å…¨éƒ½åŒºåˆ†å¤§å°å†™å‘¢~ï¼‰\n\t! It's the beginning. w.è¾“å…¥ h.å¸®åŠ©åŠå…³äº q.é€€å‡º\n");
             continue;
         } else if (c == 'q') {
             break;
         } else {
-            printf("ÄãÔÚËµÊ²Ã´£¬ÎÒÌı²»¶®\n");
+            printf("ä½ åœ¨è¯´ä»€ä¹ˆï¼Œæˆ‘å¬ä¸æ‡‚\n");
             continue;
         }
         fflush(stdin);
-        printf("ÓÖµ½ÁË°´¼üµÄÊ±ºòÁË£¡£¨Çø·Ö´óĞ¡Ğ´£©£º\n\ta.¼Ó·¨, b.¼õ·¨, c.³Ë·¨, d.³ı·¨, r.·µ»ØÉÏÒ»¼¶£¨ÍË³ö»òÖØĞÂÊäÈë£©\n");
+        printf("åˆåˆ°äº†æŒ‰é”®çš„æ—¶å€™äº†ï¼ï¼ˆåŒºåˆ†å¤§å°å†™ï¼‰ï¼š\n\ta.åŠ æ³•, b.å‡æ³•, c.ä¹˜æ³•, d.é™¤æ³•, r.è¿”å›ä¸Šä¸€çº§ï¼ˆé€€å‡ºæˆ–é‡æ–°è¾“å…¥ï¼‰\n");
         while (c = getchar()) {
             fflush(stdin);
             if (c == 'a') {
                 plus(num1,num2, &num3);
-                printf("¼Ó·¨ ");
+                printf("åŠ æ³• ");
             } else if (c == 'b') {
                 minus(num1,num2, &num3);
-                printf("¼õ·¨ ");
+                printf("å‡æ³• ");
             } else if (c == 'c') {
                 times(num1,num2, &num3);
-                printf("³Ë·¨ ");
+                printf("ä¹˜æ³• ");
             } else if (c == 'd') {
                 if (multi(num1,num2, &num3)) {
-                    printf("³ö´íÁË£¬±»³ıÊı²»ÄÜÎª0\n");
+                    printf("å‡ºé”™äº†ï¼Œè¢«é™¤æ•°ä¸èƒ½ä¸º0\n");
                     continue;
                 }
-                printf("³ı·¨ ");
+                printf("é™¤æ³• ");
             } else if (c == 'r') {
-                printf("°´ÏÂ¼üÅÌÉÏµÄ°´¼üÀ´²Ù×÷°É£¨²Ëµ¥È«¶¼Çø·Ö´óĞ¡Ğ´ÄØ~£©\n\t! It's the beginning. w.ÊäÈë h.°ïÖú¼°¹ØÓÚ q.ÍË³ö\n");
+                printf("æŒ‰ä¸‹é”®ç›˜ä¸Šçš„æŒ‰é”®æ¥æ“ä½œå§ï¼ˆèœå•å…¨éƒ½åŒºåˆ†å¤§å°å†™å‘¢~ï¼‰\n\t! It's the beginning. w.è¾“å…¥ h.å¸®åŠ©åŠå…³äº q.é€€å‡º\n");
                 break;
             } else {
-                printf("ÊäÈë´íÎó£¬ÇëÖØĞÂÊäÈë\n");
+                printf("è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥\n");
                 continue;
             }
-            printf("ÎÒ°ïÄãËãµÄ½á¹û£º ");
+            printf("æˆ‘å¸®ä½ ç®—çš„ç»“æœï¼š ");
             output(num3);
         }
     }
 
-    printf("¸ĞĞ»Ê¹ÓÃ£¬ÏÂ´ÎÔÙ¼û~ÔÙÇÃÒ»ÏÂ¼üÅÌÎÒ¾Í×ßÀ²");
+    printf("æ„Ÿè°¢ä½¿ç”¨ï¼Œä¸‹æ¬¡å†è§~å†æ•²ä¸€ä¸‹é”®ç›˜æˆ‘å°±èµ°å•¦");
     getchar();
 /*
     input(&num1);

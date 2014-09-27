@@ -1,25 +1,25 @@
 #include <stdio.h>
 
-#define TABINC 8    // Ã¿¸ô8¸öÎ»ÖÃ³öÏÖTAB
+#define TABINC 8    // æ¯éš”8ä¸ªä½ç½®å‡ºç°TAB
 
 main(void)
 {
     int c, nb, pos;
 
-    nb = 0;     // ËùĞèµÄ¿Õ°×ÊıÁ¿
-    pos = 1;    // ĞĞÖĞ×Ö·ûµÄÎ»ÖÃ
+    nb = 0;     // æ‰€éœ€çš„ç©ºç™½æ•°é‡
+    pos = 1;    // è¡Œä¸­å­—ç¬¦çš„ä½ç½®
     while ((c = getchar()) != EOF) {
-        if (c == '\t') {    // ÖÆ±í·û
+        if (c == '\t') {    // åˆ¶è¡¨ç¬¦
             nb = TABINC - (pos - 1) % TABINC;
             while (nb > 0) {
                 putchar(' ');
                 ++pos;
                 --nb;
             }
-        } else if (c == '\n') {     // »»ĞĞ·û
+        } else if (c == '\n') {     // æ¢è¡Œç¬¦
             putchar(c);
             pos = 1;
-        } else {        // ÆäËûÈ«²¿×Ö·û
+        } else {        // å…¶ä»–å…¨éƒ¨å­—ç¬¦
             putchar(c);
             ++pos;
         }

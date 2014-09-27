@@ -8,7 +8,7 @@ int main(void)
 
     while ((c = getchar()) != '\n') {
         if (isalpha(c)) {
-            i = tolower(c) - 'a' + 1;       // µÚ¼¸¸öÓ¢ÎÄµ¥´Ê
+            i = tolower(c) - 'a' + 1;       // ç¬¬å‡ ä¸ªè‹±æ–‡å•è¯
             if (islower(c))
                 putchar('a' + 26 - i);
             else

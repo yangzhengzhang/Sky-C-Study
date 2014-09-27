@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-/* È·ÈÏÊäÈëÁËÒ»¸öÕûÊı */
+/* ç¡®è®¤è¾“å…¥äº†ä¸€ä¸ªæ•´æ•° */
 int get_int (void);
-/* È·ÈÏ·¶Î§µÃÉÏÏÂ½çÊÇ·ñÓĞĞ§ */
+/* ç¡®è®¤èŒƒå›´å¾—ä¸Šä¸‹ç•Œæ˜¯å¦æœ‰æ•ˆ */
 bool bad_limits(int begin, int end, int low, int high);
-/* ¼ÆËã´Óaµ½bÖ®¼äÕûÊıµÄÆ½·½ºÍ */
+/* è®¡ç®—ä»aåˆ°bä¹‹é—´æ•´æ•°çš„å¹³æ–¹å’Œ */
 double sum_squares(int a, int b);
 
 int main(void)
 {
-    const int MIN = -1000;  // ·¶Î§µÄÏÂ½çÏŞÖÆ
-    const int MAX = +1000;  // ·¶Î§µÄÉÏ½çº¯Êı
-    int start;              // ·¶Î§µÄÏÂ½ç
-    int stop;               // ·¶Î§µÄÉÏ½ç
+    const int MIN = -1000;  // èŒƒå›´çš„ä¸‹ç•Œé™åˆ¶
+    const int MAX = +1000;  // èŒƒå›´çš„ä¸Šç•Œå‡½æ•°
+    int start;              // èŒƒå›´çš„ä¸‹ç•Œ
+    int stop;               // èŒƒå›´çš„ä¸Šç•Œ
     double answer;
 
     printf("This program computes the sum of the squares of "

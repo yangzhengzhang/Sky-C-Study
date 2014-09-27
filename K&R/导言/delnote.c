@@ -4,7 +4,7 @@ void rcomment(int c);
 void in_comment(void);
 void echo_quote(int c);
 
-/* ÒÆ³ıËùÓĞ×¢ÊÍ */
+/* ç§»é™¤æ‰€æœ‰æ³¨é‡Š */
 main(void)
 {
     int c, d;
@@ -14,46 +14,46 @@ main(void)
     return 0;
 }
 
-/* ÔÄ¶ÁÃ¿¸ö×Ö½Ú£¬ÒÆ³ı×¢ÊÍ */
+/* é˜…è¯»æ¯ä¸ªå­—èŠ‚ï¼Œç§»é™¤æ³¨é‡Š */
 void rcomment(int c)
 {
     int d;
 
     if (c == '/')
         if ((d = getchar()) == '*')
-            in_comment();       /* ¿ªÊ¼×¢ÊÍ */
+            in_comment();       /* å¼€å§‹æ³¨é‡Š */
         else if (d == '/') {
-            putchar(c);             /* ÁíÒ»¸öĞ±¸Ü */
+            putchar(c);             /* å¦ä¸€ä¸ªæ–œæ  */
             rcomment(d);
         } else {
-            putchar(c);             /* ²»ÊÇ×¢ÊÍ */
+            putchar(c);             /* ä¸æ˜¯æ³¨é‡Š */
             putchar(d);
         }
-    else if (c == '\'' || c == '"')     /* ÒıºÅÖĞµÄÄÚÈİÔ­ÑùÊä³ö */
-        echo_quote(c);      /* ÒıÓÃ¿ªÊ¼ */
+    else if (c == '\'' || c == '"')     /* å¼•å·ä¸­çš„å†…å®¹åŸæ ·è¾“å‡º */
+        echo_quote(c);      /* å¼•ç”¨å¼€å§‹ */
     else
-        putchar(c);     /* ²»ÊÇ×¢ÊÍ */
+        putchar(c);     /* ä¸æ˜¯æ³¨é‡Š */
 }
 
-/* in_commentº¯Êı£ºÔÚÒ»¸öÓĞĞ§µÄ×¢ÊÍÄÚ */
+/* in_commentå‡½æ•°ï¼šåœ¨ä¸€ä¸ªæœ‰æ•ˆçš„æ³¨é‡Šå†… */
 void in_comment(void)
 {
     int c, d;
-    c = getchar();  /* ÉÏÒ»¸ö×Ö½Ú */
-    d = getchar();  /* ËùÔÚµÄ×Ö½Ú */
-    while (c != '*' || d != '/') {  /* ËÑË÷½áÊø±êÖ¾ */
+    c = getchar();  /* ä¸Šä¸€ä¸ªå­—èŠ‚ */
+    d = getchar();  /* æ‰€åœ¨çš„å­—èŠ‚ */
+    while (c != '*' || d != '/') {  /* æœç´¢ç»“æŸæ ‡å¿— */
         c = d;
         d = getchar();
     }
 }
 
-/* echo_quoteº¯Êı£ºÃ¿¸öº¯ÊıÄÚµÄ×Ö·û */
+/* echo_quoteå‡½æ•°ï¼šæ¯ä¸ªå‡½æ•°å†…çš„å­—ç¬¦ */
 void echo_quote(int c)
 {
     int d;
 
     putchar(c);
-    while ((d = getchar()) != c) {  /* ËÑË÷½áÊø±êÖ¾ */
+    while ((d = getchar()) != c) {  /* æœç´¢ç»“æŸæ ‡å¿— */
         putchar(d);
         if (d == '\\')
             putchar(getchar());

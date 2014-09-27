@@ -6,7 +6,7 @@ int main(void)
 {
     int num;
 
-    printf("请输入你要的层数: ");
+    printf("璇疯緭鍏ヤ綘瑕佺殑灞傛暟: ");
     scanf("%d", &num);
     Yang(num);
 

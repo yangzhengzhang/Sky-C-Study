@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* Í³¼Æ×Ö·û´®×Ö·ûÊý */
+/* ç»Ÿè®¡å­—ç¬¦ä¸²å­—ç¬¦æ•° */
 int len(char s[])
 {
     int i = 0;
@@ -9,7 +9,7 @@ int len(char s[])
     return i;
 }
 
-/* Á¬½Ó×Ö·û´® */
+/* è¿žæŽ¥å­—ç¬¦ä¸² */
 void cat(char array1[], char array2[])
 {
     int i, j;

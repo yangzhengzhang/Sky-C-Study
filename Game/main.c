@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 /**
-    ¸ñÊ½»¯ÅÅ°æ
+    æ ¼å¼åŒ–æ’ç‰ˆ
 */
 
 void lines(void)
@@ -28,35 +28,35 @@ void hplines(hp)
 }
 
 /**
-    ²Ëµ¥
+    èœå•
 */
 int menu(void)
 {
     int action;
 
     lines();
-    printf("\t\t\t²Ëµ¥£¨ÊäÈë¶ÔÓ¦Êı×Ö²Ù×÷£©\n");
-    printf("1.¿ªÊ¼ÓÎÏ·\t");
-    printf("2.ÓÎÏ·ËµÃ÷\t");
-    printf("3.ÍË³öÓÎÏ·\n");
+    printf("\t\t\tèœå•ï¼ˆè¾“å…¥å¯¹åº”æ•°å­—æ“ä½œï¼‰\n");
+    printf("1.å¼€å§‹æ¸¸æˆ\t");
+    printf("2.æ¸¸æˆè¯´æ˜\t");
+    printf("3.é€€å‡ºæ¸¸æˆ\n");
     lines();
 
     while (action = getchar(), action != '1' && action != '2' && action != '3')
     {
         getchar();
-        printf("´íÎóÊı×Ö£¬ÇëÖØÊÔ£º ");
+        printf("é”™è¯¯æ•°å­—ï¼Œè¯·é‡è¯•ï¼š ");
     }
     getchar();
     switch (action) {
         case '1':
             return 1;
         case '2':
-            printf("ÔİÊ±ÀÁµÃĞ´\n");
-            printf("ÊÇ·ñ¿ªÊ¼ÓÎÏ·£¨ÊäÈë1¿ªÊ¼£©£º");
+            printf("æš‚æ—¶æ‡’å¾—å†™\n");
+            printf("æ˜¯å¦å¼€å§‹æ¸¸æˆï¼ˆè¾“å…¥1å¼€å§‹ï¼‰ï¼š");
             while (getchar() != '1')
             {
                 getchar();
-                printf("´íÎóÊı×Ö£¬ÇëÖØÊÔ£º ");
+                printf("é”™è¯¯æ•°å­—ï¼Œè¯·é‡è¯•ï¼š ");
             }
             getchar();
             return 1;
@@ -67,32 +67,32 @@ int menu(void)
 
 int main(void)
 {
-    int userNumber, comNumber;  /* ÓÎÏ·Ñ¡ÔñºÅÂë */
-    int userHp, comHp;  /* HPÇé¿ö */
-    const char const *name[] = {"¿¨Ææ", "ÂŞË¹", "ÌØÂ³", "Ã×Â¬", "À­Ã×", "½Ü¿Ë"};  /* ½ÇÉ«Ãû */
-    const int skilled[] = {3, 5, 6, 6, 3 ,5};   /* ÉÃ³¤È­·¨±àºÅ */
-    const char const *introduce[] = {"ÉÃ³¤Ö±È­", "ÉÃ³¤¹´È­", "ÉÃ³¤ÉÏ»÷È­", "ÉÃ³¤ÉÏ»÷È­", "ÉÃ³¤Ö±È­", "ÉÃ³¤¹´È­"};
-    const char const *morra[] = {"Ê¯Í·", "¼ôµ¶", "²¼"};
-    const char const *skillName[] = {"µ·È­", "µ·È­", "Ö±È­", "±ØÉ±È­", "¹´È­", "ÉÏ»÷È­"};
+    int userNumber, comNumber;  /* æ¸¸æˆé€‰æ‹©å·ç  */
+    int userHp, comHp;  /* HPæƒ…å†µ */
+    const char const *name[] = {"å¡å¥‡", "ç½—æ–¯", "ç‰¹é²", "ç±³å¢", "æ‹‰ç±³", "æ°å…‹"};  /* è§’è‰²å */
+    const int skilled[] = {3, 5, 6, 6, 3 ,5};   /* æ“…é•¿æ‹³æ³•ç¼–å· */
+    const char const *introduce[] = {"æ“…é•¿ç›´æ‹³", "æ“…é•¿å‹¾æ‹³", "æ“…é•¿ä¸Šå‡»æ‹³", "æ“…é•¿ä¸Šå‡»æ‹³", "æ“…é•¿ç›´æ‹³", "æ“…é•¿å‹¾æ‹³"};
+    const char const *morra[] = {"çŸ³å¤´", "å‰ªåˆ€", "å¸ƒ"};
+    const char const *skillName[] = {"æ£æ‹³", "æ£æ‹³", "ç›´æ‹³", "å¿…æ€æ‹³", "å‹¾æ‹³", "ä¸Šå‡»æ‹³"};
     const int hurt[] = {1, 1, 2, 4, 2, 2};
     int i, count, turns;
     int userFinger, comFinger, dice;
     int beast;
-    int finger = 1; /* ÓÃÓÚ²ÂÈ­¼ÇÂ¼Ê¤¸º */
+    int finger = 1; /* ç”¨äºçŒœæ‹³è®°å½•èƒœè´Ÿ */
 
     srand((int) time(0));
 
     while (menu())
     {
-        printf("Step 1: Ñ¡ÔñÑ¡ÊÖ\n");
-        /* Ñ¡ÊÖ½éÉÜ */
+        printf("Step 1: é€‰æ‹©é€‰æ‰‹\n");
+        /* é€‰æ‰‹ä»‹ç» */
         for (i = 0; i < 6; i++)
-            printf("%d. %s£º %s\n", i + 1, *(name + i), *(introduce + i));
-        printf("ÇëÊäÈë±àºÅÑ¡Ôñ½ÇÉ«£º");
+            printf("%d. %sï¼š %s\n", i + 1, *(name + i), *(introduce + i));
+        printf("è¯·è¾“å…¥ç¼–å·é€‰æ‹©è§’è‰²ï¼š");
         while ((userNumber = getchar() - '0') < 1 || userNumber > 6 )
         {
             getchar();
-            printf("´íÎóÊı×Ö£¬ÇëÖØÊÔ£º");
+            printf("é”™è¯¯æ•°å­—ï¼Œè¯·é‡è¯•ï¼š");
         }
         getchar();
         while ((comNumber = (int) ( (rand() / RAND_MAX) * 6 ) + 1) == userNumber)
@@ -101,42 +101,42 @@ int main(void)
         turns = 1;
         count = 0;
 
-        printf("Step 2: ÓÎÏ·¿ªÊ¼\n");
+        printf("Step 2: æ¸¸æˆå¼€å§‹\n");
         while (userHp > 0 && comHp > 0)
         {
-            /* Ê×ÏÈ²ÂÈ­ */
+            /* é¦–å…ˆçŒœæ‹³ */
             while(finger)
             {
-                printf("\nÄãÏë³ö£º ");
+                printf("\nä½ æƒ³å‡ºï¼š ");
                 for(i = 0; i < 3; i++)
                     printf("%d . %s\t", i + 1, *(morra + i));
-                printf("\nÊäÈë±àºÅ£º");
+                printf("\nè¾“å…¥ç¼–å·ï¼š");
 
                 while ((userFinger = getchar() - '0') < 1 || userFinger > 3)
                 {
                     putchar('\n');
                     getchar();
-                    printf("´íÎóÊı×Ö£¬ÇëÖØÊÔ£º");
+                    printf("é”™è¯¯æ•°å­—ï¼Œè¯·é‡è¯•ï¼š");
                 }
                 getchar();
                 userFinger--;
                 if ((comFinger = (int) ((rand() / (float)RAND_MAX) * 3) ) == userFinger)
                 {
                     putchar('\n');
-                    printf("Æ½¾Ö£¬ÔÙÀ´Ò»´Î°É\n");
+                    printf("å¹³å±€ï¼Œå†æ¥ä¸€æ¬¡å§\n");
                     continue;
                 }
                 else if (comFinger == 0 && userFinger == 1 || comFinger == 1 && userFinger == 2 || comFinger == 2 && userFinger == 0)
                 {
                     putchar('\n');
-                    printf("ÏµÍ³£º%s, Äã£º%s ÄãÊäÁË\n", *(morra + comFinger), *(morra + userFinger));
+                    printf("ç³»ç»Ÿï¼š%s, ä½ ï¼š%s ä½ è¾“äº†\n", *(morra + comFinger), *(morra + userFinger));
                     finger = -1;
                     dice = (int) ((rand() / (float)RAND_MAX) * 6) + 1;
                     break;
 
                 } else {
                     putchar('\n');
-                    printf("ÏµÍ³£º%s, Äã£º%s ÄãÓ®ÁË\n", *(morra + comFinger), *(morra + userFinger));
+                    printf("ç³»ç»Ÿï¼š%s, ä½ ï¼š%s ä½ èµ¢äº†\n", *(morra + comFinger), *(morra + userFinger));
                     finger = 1;
                     dice = (int) ((rand() / (float)RAND_MAX) * 6) + 1;
                     break;
@@ -144,16 +144,16 @@ int main(void)
             }
 
             if (finger < 0)
-                printf("ÏµÍ³");
+                printf("ç³»ç»Ÿ");
             else
-                printf("Äã");
-            printf("Ê¹ÓÃÁË % s Ôì³ÉÁË %d µãÉËº¦£¡\n", *(skillName + dice - 1), hurt[dice - 1]);
+                printf("ä½ ");
+            printf("ä½¿ç”¨äº† % s é€ æˆäº† %d ç‚¹ä¼¤å®³ï¼\n", *(skillName + dice - 1), hurt[dice - 1]);
             if (finger < 0)
             {
                 userHp -= hurt[dice - 1];
                 if (dice == skilled[comNumber - 1])
                 {
-                    printf("ÉÃ³¤µÄÈ­Êõ£¬¹¥»÷¼Ó³É + 3£¡\n");
+                    printf("æ“…é•¿çš„æ‹³æœ¯ï¼Œæ”»å‡»åŠ æˆ + 3ï¼\n");
                     userHp -= 3;
                 }
             }
@@ -162,7 +162,7 @@ int main(void)
                 comHp -= hurt[dice - 1];
                 if (dice == skilled[userNumber - 1])
                 {
-                    printf("ÉÃ³¤µÄÈ­Êõ£¬¹¥»÷¼Ó³É + 3£¡\n");
+                    printf("æ“…é•¿çš„æ‹³æœ¯ï¼Œæ”»å‡»åŠ æˆ + 3ï¼\n");
                     comHp -= 3;
                 }
             }
@@ -178,7 +178,7 @@ int main(void)
 
             if (!(count % 3)) {
                 turns++;
-                printf("\nÒ»»ØºÏ¹ıÈ¥£¬Ë«·½HP + 3\n");
+                printf("\nä¸€å›åˆè¿‡å»ï¼ŒåŒæ–¹HP + 3\n");
                 userHp += 2;
                 comHp += 2;
             }

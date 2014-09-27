@@ -5,7 +5,7 @@ int main(void)
     char a[3];
     int i;
 
-    printf("ÊäÈëÈı¸ö×Ö·û: ");
+    printf("è¾“å…¥ä¸‰ä¸ªå­—ç¬¦: ");
 
     for (i = 0; i < 3; i++)
         scanf("%c", &a[i]);
@@ -13,7 +13,7 @@ int main(void)
     for (i = 0; i < 3; i++)
     {
         a[i] -= 32;
-        printf("×Ö·ûÎª%c\n", a[i]);
+        printf("å­—ç¬¦ä¸º%c\n", a[i]);
     }
 
     return 0;

@@ -1,27 +1,27 @@
 #include <stdio.h>
 
-#define MAXCOL 10   // ×î´óÊäÈëÁĞ
+#define MAXCOL 10   // æœ€å¤§è¾“å…¥åˆ—
 #define TABINC 8
 
-char line[MAXCOL];  // ÊäÈëÁĞ
+char line[MAXCOL];  // è¾“å…¥åˆ—
 
 int exptab(int pos);
 int findblnk(int pos);
 int newpos(int pos);
 void printl(int pos);
 
-// ÕÛµş³¤µÄÊäÈëĞĞ±äÎªÁ½ĞĞ»ò¸ü¶ÌµÄĞĞ
+// æŠ˜å é•¿çš„è¾“å…¥è¡Œå˜ä¸ºä¸¤è¡Œæˆ–æ›´çŸ­çš„è¡Œ
 main(void)
 {
     int c, pos;
 
-    pos = 0;    // ĞĞÖĞ×Ö·ûµÄÎ»ÖÃ
+    pos = 0;    // è¡Œä¸­å­—ç¬¦çš„ä½ç½®
     while ((c = getchar()) != EOF) {
-        line[pos] = c;  // ´¢´æÏÖÔÚµÄ×Ö·û
+        line[pos] = c;  // å‚¨å­˜ç°åœ¨çš„å­—ç¬¦
         if (c == '\t')  //
             pos = exptab(pos);
         else if (c == '\n') {
-            printl(pos);    // Êä³öÄ¿Ç°ÊäÈëĞĞ
+            printl(pos);    // è¾“å‡ºç›®å‰è¾“å…¥è¡Œ
             pos = 0;
         } else if (++pos >= MAXCOL) {
             pos = findblnk(pos);
@@ -31,38 +31,38 @@ main(void)
     }
 }
 
-// printlº¯Êı£ºÊä³öĞĞÖ±µ½Ä¿Ç°Î»ÖÃ
+// printlå‡½æ•°ï¼šè¾“å‡ºè¡Œç›´åˆ°ç›®å‰ä½ç½®
 void printl(int pos)
 {
     int i;
     for (i = 0; i < pos; ++i)
         putchar(line[i]);
-    if (pos > 0)    // ÓĞ×Ö·ûÊä³öÂğ£¿
+    if (pos > 0)    // æœ‰å­—ç¬¦è¾“å‡ºå—ï¼Ÿ
         putchar('\n');
 }
 
 int exptab(int pos)
 {
-    line[pos] = " ";    // ÖÆ±í·ûÊÇÖÁÉÙÒ»¸ö¿Õ¸ñ
+    line[pos] = " ";    // åˆ¶è¡¨ç¬¦æ˜¯è‡³å°‘ä¸€ä¸ªç©ºæ ¼
     for (++pos; pos < MAXCOL && pos % TABINC != 0; ++pos)
         line[pos] = ' ';
     if (pos < MAXCOL)
-        return pos;     // ÏÖÔÚµÄĞĞÒÑÂú
+        return pos;     // ç°åœ¨çš„è¡Œå·²æ»¡
     else {
         printl(pos);
-        return 0;   // ÖØÖÃÏÖÔÚµÄÎ»ÖÃ
+        return 0;   // é‡ç½®ç°åœ¨çš„ä½ç½®
     }
 }
 
-// findblnkº¯Êı£ºÕÒµ½¿Õ¸ñµÄÎ»ÖÃ
+// findblnkå‡½æ•°ï¼šæ‰¾åˆ°ç©ºæ ¼çš„ä½ç½®
 int findblnk(int pos)
 {
     while (pos > 0 && line[pos] != ' ')
         --pos;
-    if (pos == 0)   // ÕâĞĞÃ»ÓĞ¿Õ¸ñ£¿
+    if (pos == 0)   // è¿™è¡Œæ²¡æœ‰ç©ºæ ¼ï¼Ÿ
         return MAXCOL;
-    else            // ÖÁÉÙÒ»ĞĞ
-        return pos+1;   // ¿Õ¸ñÖ®ºóµÄÎ»ÖÃ
+    else            // è‡³å°‘ä¸€è¡Œ
+        return pos+1;   // ç©ºæ ¼ä¹‹åçš„ä½ç½®
 }
 
 int newpos(int pos)
@@ -70,13 +70,13 @@ int newpos(int pos)
     int i, j;
 
     if (pos <= 0 || pos >= MAXCOL)
-        return 0;   // ÎŞĞèÖØĞÂÅÅÁĞ
+        return 0;   // æ— éœ€é‡æ–°æ’åˆ—
     else {
         i = 0;
         for (j = pos; j < MAXCOL; ++j) {
             line[i] = line[j];
             ++i;
         }
-        return i;   // ĞÂµÄÎ»ÖÃ
+        return i;   // æ–°çš„ä½ç½®
     }
 }
