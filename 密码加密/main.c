@@ -1,17 +1,17 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <ctype.h>
 int main(void)
 {
     char ch;
     int i, choice, low;
-    printf("ÇëÑ¡Ôñ 1.¼ÓÃÜ 2.½âÃÜ: ");
+    printf("è¯·é€‰æ‹© 1.åŠ å¯† 2.è§£å¯†: ");
 /*
     while ((ch = getchar()) != '1' && ch != '2') {
         getchar();
-        printf("ÇëÖØĞÂÊäÈë²¢ÖØÊÔ: ");
+        printf("è¯·é‡æ–°è¾“å…¥å¹¶é‡è¯•: ");
     }
 */
-    printf("½ÓÏÂÀ´ÊäÈë×Ö·û´®£¬Èçwww.baidu.com£¬ÇëÊäÈëbaidu: \n");
+    printf("æ¥ä¸‹æ¥è¾“å…¥å­—ç¬¦ä¸²ï¼Œå¦‚www.baidu.comï¼Œè¯·è¾“å…¥baidu: \n");
 
     while ((ch = getchar()) != 'q') {
         i = 0;
