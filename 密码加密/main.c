@@ -4,15 +4,12 @@ int main(void)
 {
     char ch;
     int i, choice, low;
-    printf("请选择 1.加密 2.解密: ");
 /*
     while ((ch = getchar()) != '1' && ch != '2') {
         getchar();
         printf("请重新输入并重试: ");
     }
 */
-    printf("接下来输入字符串，如www.baidu.com，请输入baidu: \n");
-
     while ((ch = getchar()) != 'q') {
         i = 0;
         do{
