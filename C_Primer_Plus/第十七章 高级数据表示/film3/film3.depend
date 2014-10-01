@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1412177680 source:e:\编程\c\c_primer_plus\第十七章 高级数据表示\film3\list.c
+	<stdio.h>
+	<stdlib.h>
+	"list.h"
+
+1412172890 e:\编程\c\c_primer_plus\第十七章 高级数据表示\film3\list.h
+	<stdbool.h>
+
+1412177880 source:e:\编程\c\c_primer_plus\第十七章 高级数据表示\film3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"list.h"
+
