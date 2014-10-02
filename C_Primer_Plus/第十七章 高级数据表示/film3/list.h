@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #define TSIZE 45
+
 struct film {
     char title[TSIZE];
     int rating;

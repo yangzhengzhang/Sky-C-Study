@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1412235810 source:e:\编程\c\数据结构\2.扑克牌配对\bridge.c
+	<stdio.h>
+	<stdlib.h>
+	"bridge.h"
+
+1412235824 e:\编程\c\数据结构\2.扑克牌配对\bridge.h
+
+1412234502 source:e:\编程\c\数据结构\2.扑克牌配对\main.c
+	<stdio.h>
+	<stdlib.h>
+	"bridge.h"
+
