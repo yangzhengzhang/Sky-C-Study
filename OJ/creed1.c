@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #define N 200
 #define L 202
 
@@ -12,20 +11,17 @@ int main(void)
 
     scanf("%d", &num);
     getchar();
-
     for (i = 0; i < num; i++)
     {
         j = 0;
         total = 0;
-        gets(str[i]);
-        p1 = str[i];
-
-        while (*p1 != '\0')
+        while ((c = getchar()) != '\n')
         {
-            total += *p1;
-            p1++;
+            total += c;
+            str[i][j] = c;
+            j++;
         }
-
+        str[i][j] = '\0';
         count[0][i] = total;
         count[1][i] = i;
     }
