@@ -17,8 +17,8 @@ typedef struct
 
 int input(complex *num1) {
     char c;
-    float num = 0, thatone;
-    int digitmode = 0, counter = 0, minus = 0, rpart = 0, ipart = 0, point = 0, i, thisone, pcounter = 0;
+    float num = 0, thatone; // 储存现在处理出来的数据（小数点模式）
+    int digitmode = 0, counter = 0, minus = 0, rpart = 0, ipart = 0, point = 0, i, thisone, pcounter = 0; // thisone 储存现在处理出来的数据
     while (c = getchar()) {
         /* 结果储存部分 */
         if (!isdigit(c) && c != '-' && c != '.') {
