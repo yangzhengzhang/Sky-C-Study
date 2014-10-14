@@ -23,6 +23,7 @@ Linklist list_create()
     return (Linklist)heading;
 }
 /*
+    function: search & change
     return 1 找到相同，删除
     return 0 未找到，插入操作
 */
