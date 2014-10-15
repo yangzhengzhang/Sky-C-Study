@@ -146,7 +146,7 @@ int main(void)
     {
         while (!scanf("%d", &num))
         {
-            printf("请输入正确的数字\n");
+            printf("请输入正确的数字");
             fflush(stdin);
         }
         if (num <= 13 && num > 0 && cards[num - 1] > 0)
