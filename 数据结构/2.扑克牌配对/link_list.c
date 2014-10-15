@@ -41,6 +41,21 @@ int GetElem(LinkList List, ElemType data)
 
     return i;
 }
+/* 输出第i个节点的情况 */
+LinkList NodeShow(LinkList List, int i)
+{
+    struct Node *p = List;
+    int j = 0;
+
+    while (p && j < i - 1)
+    {
+        p = p->next;
+        j++;
+    }
+
+    return p;
+}
+
 /* 插入节点，在第i个之前 */
 void ListInsert(LinkList List, int i, ElemType data)
 {
