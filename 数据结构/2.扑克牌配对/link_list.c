@@ -25,17 +25,16 @@ LinkList InitList()
     struct Node *heading = NodeCreate(0, NULL);
     return (LinkList)heading;
 }
+
 /* 查找指定位置 */
 int GetElem(LinkList List, ElemType data)
 {
     struct Node *p = List->next;
-    struct Node *q = p->next;
     int i = 1;
 
-    while (p && p->data >= data && q->data < data)
+    while (p && data > p->data)
     {
         p = p->next;
-        q = q->next;
         i++;
     }
 
@@ -47,7 +46,7 @@ LinkList NodeShow(LinkList List, int i)
     struct Node *p = List;
     int j = 0;
 
-    while (p && j < i - 1)
+    while (p && j < i)
     {
         p = p->next;
         j++;
@@ -107,7 +106,7 @@ void Show(Node *p)
 
 int ElemCount(LinkList List)
 {
-    struct Node *p = List;
+    struct Node *p = List->next;
     int counter = 0;
     while (p != NULL)
     {
@@ -118,13 +117,31 @@ int ElemCount(LinkList List)
 }
 
 /* 清空本地址 */
-void ClearList(Node *p)
+void ClearList(LinkList List)
 {
-    free(p);
+    struct Node *p;
+    while (List->next != NULL)
+    {
+        p = List->next;
+        List->next = p->next;
+        free(p);
+    }
 }
 
 int main(void)
 {
-
+    LinkList list = InitList();
+    Node *p;
+    int position, counter;
+    list->next = NodeCreate(1, list->next);
+    list->next->next = NodeCreate(3, list->next->next);
+    // Traverse(list, Show);
+    position = GetElem(list, 4);
+    ListInsert(list, position, 4);
+    counter = ElemCount(list);
+    Traverse(list, Show);
+    position = GetElem(list, 1);
+    p = NodeShow(list, position);
+    printf("\n%i", p->data);
     return 0;
 }
