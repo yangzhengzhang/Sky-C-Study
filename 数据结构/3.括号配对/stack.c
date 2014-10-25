@@ -72,7 +72,14 @@ void Push(struct stack *s, ElemType elem)
 /* 从栈内弹出 */
 void Pop(struct stack *s, size_t count)
 {
-    s->elem_count--;     // 现在的元素个数
+    if (s->elem_count >= count)
+    {
+        s->elem_count = s->elem_count - count;     // 现在的元素个数
+    }
+    else
+    {
+        s->elem_count = 0;
+    }
 }
 
 /* 获取第num个元素的值 */

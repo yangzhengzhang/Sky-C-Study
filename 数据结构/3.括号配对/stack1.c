@@ -57,11 +57,15 @@ void Push(struct Stack *s, ElemType elem)
     *s->top++ = elem;
 }
 
-void Pop(struct Stack *s)
+void Pop(struct Stack *s, size_t count)
 {
-    if (s->base != s->top)
+    if (s->top - s->base >= count)
     {
-        s->top--;
+        s->top -= count;
+    }
+    else
+    {
+        s->top = s->base;
     }
 }
 
@@ -94,7 +98,7 @@ int main(void)
     Push(&s, 'c');
     Push(&s, 'd');
     ShowAll(&s);
-    Pop(&s);
+    Pop(&s, 1);
     printf("%c", GetElem(&s, 0));
     return 0;
 }
