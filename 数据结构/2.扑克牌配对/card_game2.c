@@ -63,7 +63,7 @@ void NodeInsert(LinkList List, int i, ElemType data)
     struct Node *p = List;
     int j = 0;
 
-    while (p && j < i - 1)
+    while (p->next && j < i - 1)
     {
         p = p->next;
         j++;
