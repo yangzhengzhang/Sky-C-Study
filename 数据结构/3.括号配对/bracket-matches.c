@@ -180,15 +180,6 @@ void Show(Node *p)
 int main(void)
 {
     LinkStack s = InitStack();
-    Push(s, 'c');
-    Push(s, 'd');
-    Pop(s);
-    Push(s, 'e');
-    Traverse(s, Show);
-    ClearList(s);
-    putchar('\n');
-    Traverse(s, Show);
-    Push(s, 'b');
-    printf("%c", Pop(s));
+
     return 0;
 }
