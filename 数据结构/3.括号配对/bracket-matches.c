@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef char ElemType;  // 修改类型
 
@@ -43,7 +44,7 @@ int GetElem(LinkStack s, ElemType data)
     struct Node *node = s->next;
     int i = 1;
 
-    while (node && node->data != data)
+    while (node && node->data != data)  // 查找条件
     {
         node = node->next;
         i++;
@@ -177,9 +178,168 @@ void Show(Node *p)
     printf("%c ", p->data);      // 需要修改%c
 }
 
+void HelpManual()
+{
+    printf("Help:\n");
+    printf("  Function:\n");
+    printf("    We will check whether the brackets are matched.\n");
+    printf("  How to Use:\n");
+    printf("    1. Type words in the terminal and then use command to end.\n");
+    printf("    2. Use ':' to change to command mode and then use the following commands\n");
+    printf("  Commands List:\n");
+    printf("    exit: exit the program without check what u type\n");
+    printf("    check: finish your input and check the brackets\n");
+    printf("    help: clear all you type and call the help manual\n");
+    printf("    clear: clear all you type\n");
+    printf("    continue: exit command Mode and continue your input\n");
+    printf("\nNotice: u also can use Ctrl+Z(EOF) to check it.\n\n");
+}
+
 int main(void)
 {
     LinkStack s = InitStack();
+    ElemType elem;
+
+    int lineNum = 1;
+    int breakLine = 0;  // 标记错误的行号
+
+    /* error: 错误标记 newLine: 新行标记 commandMode: 命令模式 inputMode: 正常输入模式 */
+    int error = 0, newLine = 1, commandMode = 0, inputMode = 1;
+    char command[100];
+
+    HelpManual();
+    printf("Now Type something...\n");
+
+    while (inputMode && (elem = getchar()) != EOF)
+    {
+        /* 进入命令模式 */
+        if (newLine && elem == ':')
+        {
+            commandMode = 1;
+        }
+
+        while (commandMode)
+        {
+            fgets(command, 100, stdin);     // 输入string到command
+
+            /* command检查 */
+            if (!strcmp("exit\n", command))
+            {
+                printf("Thanks for using, Press any key to exit...");
+                getchar();
+                return 0;
+            }
+            else if (!strcmp("check\n", command))
+            {
+                inputMode = 0;
+                break;
+            }
+            else if (!strcmp("help\n", command))
+            {
+                HelpManual();
+                ClearList(s);
+                commandMode = 0;
+                inputMode = 1;
+                newLine = 1;
+                lineNum = 1;
+                breakLine = 0;
+                error = 0;
+                printf("Now Type something...\n");
+                break;
+            }
+            else if (!strcmp("continue\n", command))
+            {
+                commandMode = 0;
+                inputMode = 1;
+                break;
+            }
+            else if (!strcmp("clear\n", command))
+            {
+                ClearList(s);
+                commandMode = 0;
+                inputMode = 1;
+                newLine = 1;
+                lineNum = 1;
+                breakLine = 0;
+                error = 0;
+                printf("Now Type something...\n");
+                break;
+            }
+            else {
+                printf("Wrong Command. Try Again or use help to ask for help(Will Clear what u type).\n");
+            }
+            putchar(':');
+        }
+
+        newLine = 0;    // 没有进入commandMode 关闭newLine标记
+
+        if (elem == '\n')
+        {
+            lineNum++;
+            newLine = 1;    // newLine标记
+        }
+        /* 开始检查括号的成对型 */
+        else if (elem == '{' || elem == '[' || elem == '(' || elem == '<')
+        {
+            Push(s, elem);
+        }
+        else if (elem == '}')
+        {
+            if (Pop(s) != '{' && !error)
+            {
+                breakLine = lineNum;
+                error = 1;
+            }
+        }
+        else if (elem == ']' && !error)
+        {
+            if (Pop(s) != '[')
+            {
+                breakLine = lineNum;
+                error = 1;
+            }
+        }
+        else if (elem == ')' && !error)
+        {
+            if (Pop(s) != '(')
+            {
+                breakLine = lineNum;
+                error = 1;
+            }
+        }
+        else if (elem == '>' && !error)
+        {
+            if (Pop(s) != '<')
+            {
+                breakLine = lineNum;
+                error = 1;
+            }
+        }
+    }
+
+    /* 左括号多余 */
+    if (ElemCount(s))
+    {
+        error = 1;
+        breakLine = 0;
+    }
+
+    if (error && breakLine)
+    {
+        printf("Error in Line %d : brackets not match.\n", breakLine);
+    }
+    else if (error && !breakLine)
+    {
+        printf("Error: Extra brackets.\n");
+    }
+    else
+    {
+        printf("No Error, THX\n");
+    }
+
+    printf("Line Counter: %d\n", lineNum - 1);
+    printf("Press any keys to exit...\n");
+    getchar();
 
     return 0;
 }
