@@ -209,6 +209,7 @@ int main(void)
 
     HelpManual();
     printf("Now Type something...\n");
+    printf("%d ", lineNum);     // 显示行数
 
     while (inputMode && (elem = getchar()) != EOF)
     {
@@ -245,6 +246,7 @@ int main(void)
                 breakLine = 0;
                 error = 0;
                 printf("Now Type something...\n");
+                printf("%d ", lineNum); // 显示行数
                 break;
             }
             else if (!strcmp("continue\n", command))
@@ -263,6 +265,7 @@ int main(void)
                 breakLine = 0;
                 error = 0;
                 printf("Now Type something...\n");
+                printf("%d ", lineNum); // 显示行数
                 break;
             }
             else {
@@ -276,6 +279,7 @@ int main(void)
         if (elem == '\n')
         {
             lineNum++;
+            printf("%d ", lineNum);
             newLine = 1;    // newLine标记
         }
         /* 开始检查括号的成对型 */
