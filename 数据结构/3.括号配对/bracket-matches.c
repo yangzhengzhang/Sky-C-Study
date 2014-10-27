@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 typedef char ElemType;  // 修改类型
 
@@ -199,6 +200,26 @@ int main(void)
 {
     LinkStack s = InitStack();
     ElemType elem;
+    time_t t;   // 定义一个时间变量
+    t = time(NULL); // 获取时间
+    char *time, *p;
+    time = ctime(&t);
+    p = time;
+
+    FILE *program_data, *error_log;
+    program_data = fopen("program_data.log", "a+");
+    error_log = fopen("error_log.log", "a+");
+
+    fprintf(program_data, "=====");
+
+    while (p && *p != '\n')
+    {
+        putc(*p, program_data);
+        putc(*p, error_log);
+        p++;
+    }
+    fprintf(program_data, "=====\n");
+    fprintf(error_log, ":");
 
     int lineNum = 1;
     int breakLine = 0;  // 标记错误的行号
@@ -233,6 +254,7 @@ int main(void)
             else if (!strcmp("check\n", command))
             {
                 inputMode = 0;
+                elem = '\0';
                 break;
             }
             else if (!strcmp("help\n", command))
@@ -245,6 +267,7 @@ int main(void)
                 lineNum = 1;
                 breakLine = 0;
                 error = 0;
+                elem = '\0';
                 printf("Now Type something...\n");
                 printf("%d ", lineNum); // 显示行数
                 break;
@@ -253,6 +276,7 @@ int main(void)
             {
                 commandMode = 0;
                 inputMode = 1;
+                elem = '\0';
                 break;
             }
             else if (!strcmp("clear\n", command))
@@ -266,6 +290,7 @@ int main(void)
                 error = 0;
                 printf("Now Type something...\n");
                 printf("%d ", lineNum); // 显示行数
+                elem = '\0';
                 break;
             }
             else {
@@ -319,7 +344,11 @@ int main(void)
                 error = 1;
             }
         }
+        putc(elem, program_data);
     }
+
+    fprintf(program_data, "====end of file =====\n\n");
+
 
     /* 左括号多余 */
     if (ElemCount(s))
@@ -331,19 +360,26 @@ int main(void)
     if (error && breakLine)
     {
         printf("Error in Line %d : brackets not match.\n", breakLine);
+        fprintf(error_log, "Error in Line %d : brackets not match.\n", breakLine);
+
     }
     else if (error && !breakLine)
     {
         printf("Error: Extra brackets.\n");
+        fprintf(error_log, "Error: Extra brackets.\n");
     }
     else
     {
         printf("No Error, THX\n");
+        fprintf(error_log, "No Error, THX\n");
     }
 
     printf("Line Counter: %d\n", lineNum - 1);
     printf("Press any keys to exit...\n");
     getchar();
+
+    fclose(program_data);
+    fclose(error_log);
 
     return 0;
 }
