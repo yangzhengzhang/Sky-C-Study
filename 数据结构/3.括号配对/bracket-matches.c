@@ -218,7 +218,7 @@ int main(void)
         putc(*p, error_log);
         p++;
     }
-    fprintf(program_data, "=====\n");
+    fprintf(program_data, "=====\n\n");
     fprintf(error_log, ":");
 
     int lineNum = 1;
@@ -254,7 +254,7 @@ int main(void)
             else if (!strcmp("check\n", command))
             {
                 inputMode = 0;
-                elem = '\0';
+                elem = NULL;
                 break;
             }
             else if (!strcmp("help\n", command))
@@ -267,7 +267,7 @@ int main(void)
                 lineNum = 1;
                 breakLine = 0;
                 error = 0;
-                elem = '\0';
+                elem = NULL;
                 printf("Now Type something...\n");
                 printf("%d ", lineNum); // 显示行数
                 break;
@@ -276,7 +276,7 @@ int main(void)
             {
                 commandMode = 0;
                 inputMode = 1;
-                elem = '\0';
+                elem = NULL;
                 break;
             }
             else if (!strcmp("clear\n", command))
@@ -290,7 +290,7 @@ int main(void)
                 error = 0;
                 printf("Now Type something...\n");
                 printf("%d ", lineNum); // 显示行数
-                elem = '\0';
+                elem = '\n';
                 break;
             }
             else {
@@ -300,6 +300,10 @@ int main(void)
         }
 
         newLine = 0;    // 没有进入commandMode 关闭newLine标记
+        if (elem == NULL)
+        {
+            break;
+        }
 
         if (elem == '\n')
         {
@@ -347,7 +351,7 @@ int main(void)
         putc(elem, program_data);
     }
 
-    fprintf(program_data, "====end of file =====\n\n");
+    fprintf(program_data, "\n========== end of file ===========\n\n");
 
 
     /* 左括号多余 */
@@ -359,19 +363,19 @@ int main(void)
 
     if (error && breakLine)
     {
-        printf("Error in Line %d : brackets not match.\n", breakLine);
+        printf("Error in Line %d : brackets not match. Reading program_data.log for more.\n", breakLine);
         fprintf(error_log, "Error in Line %d : brackets not match.\n", breakLine);
 
     }
     else if (error && !breakLine)
     {
-        printf("Error: Extra brackets.\n");
+        printf("Error: Extra brackets. Reading program_data.log for more.\n");
         fprintf(error_log, "Error: Extra brackets.\n");
     }
     else
     {
         printf("No Error, THX\n");
-        fprintf(error_log, "No Error, THX\n");
+        fprintf(error_log, "No Error\n");
     }
 
     printf("Line Counter: %d\n", lineNum - 1);
