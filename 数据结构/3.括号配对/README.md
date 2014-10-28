@@ -21,11 +21,16 @@ bracket-matches.c 配对程序
 ```
 
 然后换行输入`:check`将会结束并检查程序。
+
 换行后`:`开启命令模式
 
 ###命令大全
 `:check`：结束并检查（结果存在program_data 和 error_log）
+
 `:exit`：不检查并退出（会存在program_data）
+
 `:continue`：不小心进入了命令模式，需要继续输入
+
 `:clear`：清除之前输入并清屏（日志里会有clear分割线）
+
 `:help`：查看帮助并取消之前输入（日志里会有clear分割线）
