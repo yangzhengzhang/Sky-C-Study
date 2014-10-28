@@ -184,11 +184,12 @@ void HelpManual()
     printf("Help:\n");
     printf("  Function:\n");
     printf("    We will check whether the brackets are matched.\n");
+    printf("    Logs will save in program_data.log & error_log.log.\n");
     printf("  How to Use:\n");
     printf("    1. Type words in the terminal and then use command to end.\n");
     printf("    2. Use ':' to change to command mode and then use the following commands\n");
     printf("  Commands List:\n");
-    printf("    exit: exit the program without check what u type\n");
+    printf("    exit: exit the program without check what you type\n");
     printf("    check: finish your input and check the brackets\n");
     printf("    help: clear all you type and call the help manual\n");
     printf("    clear: clear all you type\n");
@@ -249,6 +250,10 @@ int main(void)
             {
                 printf("Thanks for using, Press any key to exit...");
                 getchar();
+                fprintf(program_data, "\n========== end of file ===========\n\n");
+                fclose(program_data);
+                fclose(error_log);
+
                 return 0;
             }
             else if (!strcmp("check\n", command))
@@ -277,6 +282,9 @@ int main(void)
                 commandMode = 0;
                 inputMode = 1;
                 elem = NULL;
+
+                printf("%d ", lineNum);
+                newLine = 1;
                 break;
             }
             else if (!strcmp("clear\n", command))
@@ -285,11 +293,11 @@ int main(void)
                 commandMode = 0;
                 inputMode = 1;
                 newLine = 1;
-                lineNum = 1;
+                lineNum = 0;
                 breakLine = 0;
                 error = 0;
+                system("cls");
                 printf("Now Type something...\n");
-                printf("%d ", lineNum); // 显示行数
                 elem = '\n';
                 break;
             }
@@ -300,9 +308,10 @@ int main(void)
         }
 
         newLine = 0;    // 没有进入commandMode 关闭newLine标记
+
         if (elem == NULL)
         {
-            break;
+            continue;
         }
 
         if (elem == '\n')
@@ -369,12 +378,12 @@ int main(void)
     }
     else if (error && !breakLine)
     {
-        printf("Error: Extra brackets. Reading program_data.log for more.\n");
+        printf("Error: Losing the brackets. Reading program_data.log for more.\n");
         fprintf(error_log, "Error: Extra brackets.\n");
     }
     else
     {
-        printf("No Error, THX\n");
+        printf("No Error, Congratulations\n");
         fprintf(error_log, "No Error\n");
     }
 
