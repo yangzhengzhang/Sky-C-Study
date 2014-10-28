@@ -273,6 +273,7 @@ int main(void)
                 breakLine = 0;
                 error = 0;
                 elem = NULL;
+                fprintf(program_data, "\n============= clear ==============\n\n");
                 printf("Now Type something...\n");
                 printf("%d ", lineNum); // 显示行数
                 break;
@@ -295,6 +296,7 @@ int main(void)
                 newLine = 1;
                 lineNum = 0;
                 breakLine = 0;
+                fprintf(program_data, "\n============= clear ==============\n\n");
                 error = 0;
                 system("cls");
                 printf("Now Type something...\n");
