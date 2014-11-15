@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1415505789 source:e:\编程\c\数据结构\4.二叉树\tree\tree.c
+	<stdio.h>
+	<string.h>
+	"tree.h"
+	<stdlib.h>
+
+1415435166 e:\编程\c\数据结构\4.二叉树\tree\tree.h
+	<stdbool.h>
+
+1415505836 source:e:\编程\c\数据结构\4.二叉树\tree\putclub.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"tree.h"
+

@@ -15,12 +15,26 @@ void Show(TElemType elem)
     printf("%c" , elem);
 }
 
+void Search(BiTree T, TElemType elem, int *tag)
+{
+    if (T && T->data != elem && !*tag)
+    {
+        Search(T->lchild, elem, tag);
+        Search(T->rchild, elem, tag);
+    }
+    else if (T && T->data == elem)
+    {
+        return *tag = 1;
+    }
+}
+
+
 /* 先序遍历 */
 void Preorder(BiTree T, void(*visit)(TElemType elem))
 {
     if (T)
     {
-        printf("%c" , T->data);
+        visit(T->data);
         Preorder(T->lchild, visit);
         Preorder(T->rchild, visit);
     }
@@ -31,9 +45,9 @@ void Inorder(BiTree T, void(*visit)(TElemType e))
 {
     if (T)
     {
-        Preorder(T->lchild, visit);
+        Inorder(T->lchild, visit);
         visit(T->data);
-        Preorder(T->rchild, visit);
+        Inorder(T->rchild, visit);
     }
 }
 
@@ -43,26 +57,24 @@ void Postorder(BiTree T, void(*visit)(TElemType e))
 {
     if (T)
     {
-        Preorder(T->lchild, visit);
-        Preorder(T->rchild, visit);
+        Postorder(T->lchild, visit);
+        Postorder(T->rchild, visit);
         visit(T->data);
     }
 }
 
 /* 统计二叉树中叶子节点的个数 */
-int CountLeaf(BiTree T, int count)
+void CountLeaf(BiTree T, int *count)
 {
     if (T)
     {
         if((!T->lchild) && (!T->rchild))
         {
-            count++;
+            ++(*count);
         }
         CountLeaf(T->lchild, count);
         CountLeaf(T->rchild, count);
     }
-
-    return count;
 }
 
 /* 计算深度 */
@@ -155,7 +167,8 @@ BiTree CreateBiTree(BiTree T)
 
 int main(void)
 {
-    BiTree T;
+    BiTree T, Tcopy;
+    int tag = 0;
     int count = 0;
     T = CreateBiTree(T);
     printf("先序：");
@@ -166,5 +179,24 @@ int main(void)
     Postorder(T, Show);
     printf("\n计算深度：");
     printf("%d ", Depth(T, count));
+    printf("\n叶子数：");
+    CountLeaf(T, &count);
+    printf("%d\n", count);
+    printf("复制树中...\n");
+    Tcopy = CopyTree(T);
+    printf("复制树先序：");
+    Preorder(T, Show);
+    getchar();
+    printf("\n输入一个字符，我来搜索：");
+    Search(T, getchar(), &tag);
+    if (tag)
+    {
+        printf("Get!");
+    }
+    else
+    {
+        printf("404 Not Found");
+    }
+
     return 0;
 }
