@@ -21,7 +21,7 @@ typedef struct Node
 
 void InitTree(Tree *ptree, Node *node)
 {
-    ptree->root = NULL;
+    ptree->root = node;
 }
 
 bool TreeIsEmpty(Tree *ptree)
