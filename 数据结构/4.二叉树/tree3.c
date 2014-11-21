@@ -185,8 +185,7 @@ int SearchNode(Node *node, int status, Elem elem)
     if (!status && node)
     {
         status = (node->elem == elem);
-        SearchNode(node->left, status, elem);
-        SearchNode(node->right, status, elem);
+        status = SearchNode(node->left, status, elem) || SearchNode(node->right, status, elem);
     }
 
     return status;
