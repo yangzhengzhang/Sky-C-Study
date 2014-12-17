@@ -118,7 +118,7 @@ void initPrimTree(int martix[100][100], int n, int *able, Node *(nodeadr[100]))
         printf("MinParent: %d to MinNode: %d, MinCost: %d\n", minParent, minNode, minCost);
     }
 }
-/*
+
 void initKruskalTree(int martix[100][100], int *able, int n, Node *(nodeadr[100]))
 {
     int i, j, k;
@@ -195,7 +195,7 @@ int checkRound(Node *addr, int found, Node *target, Node *pre)
 
     return found;
 }
-*/
+
 int able[100] = {0};
 int martix[100][100];
 Node *(nodeadr[100]) = {NULL};
