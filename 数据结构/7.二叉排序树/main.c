@@ -96,7 +96,7 @@ void Delete(Tree *T)
     if (!(*T)->right)     // 没有右子树
     {
         printf("没有右子树，开始努力删除");
-        p = T;
+        p = *T;
         *T = (*T)->left;
         free(p);
     }
@@ -109,19 +109,21 @@ void Delete(Tree *T)
     }
     else
     {
-        printf("什么都有，努力删除中");
+        printf("什么都有，努力删除中\n");
         p = *T;
         q = (*T)->left;
-        while (!q->right)
+        while (q->right)
         {
+            printf("目前所在位置：%d\n", q->data);
             p = q;
             q = q->right;
         }
         (*T)->data = q->data;
+        printf("查找完毕\n");
         if (p != *T)
             p->right = q->left;
         else
-            p->left = q->right;
+            p->left = q->left;
 
         free(q);
     }
