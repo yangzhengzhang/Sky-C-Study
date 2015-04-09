@@ -11,9 +11,6 @@ typedef struct HashTable
     int counter;
 } HashTable;
 
-
-
-
 int main(void)
 {
     int tempLocation = 0, strmax = 100;
@@ -27,10 +24,10 @@ int main(void)
     int position;
     int i, j;
     int maxPosition = 0, maxCount = 0;
-    
+
     head = temp;
     /* printf("p = %d\n", head);*/
-    
+
     for (i = 0; i < HashTableMax; i++)
     {
         hashTable[i].asciiSum = 0;
@@ -38,7 +35,7 @@ int main(void)
         hashTable[i].head = NULL;
         hashTable[i].counter = 0;
     }
-    
+
     while ((c = getchar()) != EOF)
     {
         if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
@@ -56,7 +53,7 @@ int main(void)
             position = asciiSum % 83;
             /*printf("%d", HashTable[3][position]);*/
             //Sleep(2000);
-            
+
             if (!hashTable[position].head)
             {
                 hashTable[position].asciiSum = asciiSum;
@@ -64,7 +61,7 @@ int main(void)
                 hashTable[position].head = head;
                 hashTable[position].counter++;
                 //printf("String:%s, AsciiSum: %d, length: %d\n", temp, asciiSum, length);
-                printf("New one, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
+                //printf("New one, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
             }
             else
             {
@@ -83,11 +80,12 @@ int main(void)
                         {
                             position = i;
                             hashTable[position].counter++;
-                            printf("Haved, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
+                            // printf("Haved, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
+                            printf("Error");
                             same = 1;
                             break;
                         }
-                        
+
                     }
                     i++;
                     if (i > HashTableMax)
@@ -112,7 +110,7 @@ int main(void)
                             hashTable[position].head = head;
                             hashTable[position].counter++;
                             //printf("String:%s, AsciiSum: %d, length: %d\n", temp, asciiSum, length);
-                            printf("Adding, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
+                            // printf("Adding, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
                             break;
                         }
                         i++;
@@ -125,7 +123,7 @@ int main(void)
                             HashTableMax *= 2;
                             hashTable = (HashTable *)realloc(hashTable, sizeof(HashTable) * HashTableMax);
                             /*printf("已重新分配");*/
-                            
+
                             for (j = HashTableMax / 2; j < HashTableMax; j++)
                             {
                                 /*printf("Here is : %d\n", j);*/
@@ -158,11 +156,11 @@ int main(void)
             }
         }
     }
-    
+
     position = maxPosition;
-    
+
     printf("String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
-    
-    
+
+
     return 0;
 }
