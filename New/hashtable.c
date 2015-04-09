@@ -12,13 +12,23 @@ typedef struct HashTable
     int count;  // 计数
 } HashTable;
 
+void InitHashTable(HashTable *table, size_t from, size_t to)
+{
+    size_t i;
+    for (i = from; i < to; i++)
+    {
+        (table+i)->word = NULL;
+        (table+i)->count = 0;
+    }
+}
+
 int InputWord(char *temp)
 {
     char c;
     int length = 0;
     while ((c = getchar()) != EOF)
     {
-        if (isalnum(c))
+        if (isalnum(c) || c == '-')
         {
             *(temp + length) = c;
             length++;
@@ -63,16 +73,6 @@ int Locate(char *temp, HashTable **table, int length, size_t *buf_times)
     }
 
     return i;
-}
-
-void InitHashTable(HashTable *table, size_t from, size_t to)
-{
-    size_t i;
-    for (i = from; i < to; i++)
-    {
-        (table+i)->word = NULL;
-        (table+i)->count = 0;
-    }
 }
 
 int main(void)
