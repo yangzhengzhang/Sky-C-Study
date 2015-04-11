@@ -3,164 +3,160 @@
 #include <ctype.h>
 #include <string.h>
 
+#define MAX_BUF 400
+
+// 构建哈希表
 typedef struct HashTable
 {
-    int asciiSum;
-    int strlen;
-    char *head;
-    int counter;
+    char *word; // 单词首地址
+    int count;  // 计数
 } HashTable;
+
+/*
+    对哈希表进行初始化
+ 
+    @params *table 哈希表
+    @params from 起始值
+    @params to 终止值（不含）
+ 
+    @return NULL
+ */
+void InitHashTable(HashTable *table, size_t from, size_t to)
+{
+    size_t i;
+    
+    HashTable *curr = NULL;
+    
+    for (i = from; i < to; i++)
+    {
+        curr = table + i;
+        
+        curr->word = NULL;
+        curr->count = 0;
+    }
+}
+
+/*
+    录入单词
+ 
+    @params *temp 存放单词的临时变量
+    @params maxLength 可存放的最大长度
+ 
+    @return length 单词长度
+ */
+int InputWord(char *temp, size_t maxLength)
+{
+    char c;
+    int length = 0;
+    while ((c = getchar()) != EOF)
+    {
+        if (length < maxLength && (isalnum(c) || c == '-'))     // 单词过长抛弃部分，如果是字母或数字或有-连接符，则判断为单词
+        {
+            *(temp + length) = c;
+            length++;
+        }
+        else
+        {
+            *(temp + length) = '\0';
+            length++;
+            break;
+        }
+    }
+    
+    return length;
+}
+
+/*
+    计算哈希值确定在哈希表中的默认位置
+ 
+    @params temp 存放单词的临时变量
+ 
+    @return hashValue 哈希值
+ */
+int CalculateHashValue(char *temp)
+{
+    size_t asciiSum = 0;
+    
+    while (*temp)
+    {
+        asciiSum += *temp;
+        temp++;
+    }
+    return asciiSum % MAX_BUF;
+}
+
+/*
+    确定实际存放位置，如果不够则开辟空间
+ 
+    @params *temp 存放单词的临时变量
+    @params **table 哈希表的地址
+    @params length 单词长度
+    @params *buf_times 目前哈希表表倍数的地址
+ 
+    @return i 实际存放位置
+ */
+int Locate(char *temp, HashTable **table, int length, size_t *buf_times)
+{
+    int head, i;    // head 默认存放位置
+    
+    for (i = head = CalculateHashValue(temp); (*table + i)->word != NULL && strcmp(temp, (*table +i)->word) != 0; )     // 如果单词存在并且与已存单词不同
+    {
+        i++;        // 线性探测查找位置
+        if (i == MAX_BUF * *buf_times)  // 如果探测到尾部，从头开始
+            i = 0;
+        if (i == head)  // 如果完成一圈查找并没有找到，则表增加一倍
+        {
+            (*buf_times)++;
+            *table = (HashTable *)realloc(*table, sizeof(HashTable) * MAX_BUF * *buf_times);
+            InitHashTable(*table, MAX_BUF * (*buf_times - 1), MAX_BUF * *buf_times);
+        }
+    }
+    
+    return i;
+}
 
 int main(void)
 {
-    int tempLocation = 0, strmax = 100;
-    char *temp = (char*)malloc(sizeof(char) * strmax), *head;
-    char c;
-    int HashTableMax = 100;
-    HashTable *hashTable = (HashTable *)malloc(sizeof(HashTable) * HashTableMax);
-//    int (*HashTable)[HashTableMax] = (int (*)[HashTableMax])malloc(sizeof(int [HashTableMax]));
-    int status = 0, asciiSum = 0, length = 0;
-    int same = 0;
-    int position;
-    int i, j;
-    int maxPosition = 0, maxCount = 0;
-
-    head = temp;
-    /* printf("p = %d\n", head);*/
-
-    for (i = 0; i < HashTableMax; i++)
+    size_t temp_buf = 50;   // 临时单词变量长度
+    size_t buf_times = 1;   // 哈希表表长倍数
+    size_t max_count = 0, max_position = 0; // 用于最后顺序查找最大值
+    char *temp = (char *)malloc(temp_buf);
+    HashTable *table = (HashTable *)malloc(sizeof(HashTable) * MAX_BUF * buf_times);
+    HashTable *curr;
+    int strLength, i;   // 单词长度
+    
+    InitHashTable(table, 0, MAX_BUF * buf_times);
+    
+    for (i = 0; i < 50; i++)
+        putchar('a');
+    while ( (strLength = InputWord(temp, temp_buf)) != 0)
     {
-        hashTable[i].asciiSum = 0;
-        hashTable[i].strlen = 0;
-        hashTable[i].head = NULL;
-        hashTable[i].counter = 0;
-    }
-
-    while ((c = getchar()) != EOF)
-    {
-        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+        if (*temp == '\0')  // 如果单词为空，丢弃这个单词并继续
         {
-            status = 1;
-            c = tolower(c);
-            *(temp + length) = c;
-            asciiSum += c;
-            length++;
+            continue;
         }
-        else if (status == 1)
+        i = Locate(temp, &table, strLength, &buf_times);
+        curr = table + i;
+        if (curr->word == NULL)
         {
-            *(temp + length) = '\0';
-            //printf("String:%s, AsciiSum: %d, length: %d\n", temp, asciiSum, length);
-            position = asciiSum % 83;
-            /*printf("%d", HashTable[3][position]);*/
-            //Sleep(2000);
-
-            if (!hashTable[position].head)
-            {
-                hashTable[position].asciiSum = asciiSum;
-                hashTable[position].strlen = length;
-                hashTable[position].head = head;
-                hashTable[position].counter++;
-                //printf("String:%s, AsciiSum: %d, length: %d\n", temp, asciiSum, length);
-                //printf("New one, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
-            }
-            else
-            {
-                same = 0;
-                i = position;
-                while (1)
-                {
-                    //printf("没找到相同的 开始循环！\n");
-                    /*printf("Length: %d", HashTable[1][i]);*/
-                    if (!hashTable[i].head)
-                        break;
-                    if (hashTable[i].strlen == length)
-                    {
-                        /*                        printf("找到啦长度不错哒!\n");*/
-                        if (strcmp(head, hashTable[i].head) == 0)
-                        {
-                            position = i;
-                            hashTable[position].counter++;
-                            // printf("Haved, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
-                            printf("Error");
-                            same = 1;
-                            break;
-                        }
-
-                    }
-                    i++;
-                    if (i > HashTableMax)
-                    {
-                        /*                        printf("开始新一轮");
-                         Sleep(200);*/
-                        i = 0;
-                    }
-                    else if (i == position)
-                        break;
-                }
-                if (!same)
-                {
-                    i = position;
-                    while (1)
-                    {
-                        if (!hashTable[i].head)
-                        {
-                            position = i;
-                            hashTable[position].asciiSum = asciiSum;
-                            hashTable[position].strlen = length;
-                            hashTable[position].head = head;
-                            hashTable[position].counter++;
-                            //printf("String:%s, AsciiSum: %d, length: %d\n", temp, asciiSum, length);
-                            // printf("Adding, String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
-                            break;
-                        }
-                        i++;
-                        /*printf("Now i = %d\n", i);*/
-                        if (i > HashTableMax)
-                            i = 0;
-                        else if (i == position)
-                        {
-                            /*printf("开始重新分配");*/
-                            HashTableMax *= 2;
-                            hashTable = (HashTable *)realloc(hashTable, sizeof(HashTable) * HashTableMax);
-                            /*printf("已重新分配");*/
-
-                            for (j = HashTableMax / 2; j < HashTableMax; j++)
-                            {
-                                /*printf("Here is : %d\n", j);*/
-                                hashTable[i].asciiSum = 0;
-                                hashTable[i].strlen = 0;
-                                hashTable[i].head = NULL;
-                                hashTable[i].counter = 0;
-                            }
-                        }
-                    }
-                }
-            }
-            if (hashTable[position].counter > maxCount)
-            {
-                maxPosition = position;
-                maxCount = hashTable[position].counter;
-                /*printf("最高纪录已刷新");*/
-            }
-            temp += (length + 1);
-            head = temp;
-            /*printf("p = %d\n", head);*/
-            length = 0;
-            asciiSum = 0;
-            status = 0;
-            tempLocation += length;
-            if (strmax - tempLocation < 50)
-            {
-                strmax *= 2;
-                temp = (char *)realloc(temp, sizeof(char) * strmax);
-            }
+            curr->word = (char *)malloc(strLength);    // 根据单词长度开辟空间
+            strcpy(curr->word, temp);    // 拷贝到目标位置
+            //           printf("%s %s", temp, (table+i)->word);
+        }
+        curr->count++;
+    }
+    
+    for (i = 0; i < MAX_BUF * buf_times; i++)
+    {
+        curr = table + i;
+        if (curr->count > max_count)
+        {
+            max_position = i;
+            max_count = curr->count;
         }
     }
-
-    position = maxPosition;
-
-    printf("String:%s, AsciiSum: %d, length: %d, counter: %d\n", hashTable[position].head, hashTable[position].asciiSum, hashTable[position].strlen, hashTable[position].counter);
-
-
+    
+    printf("Max Word: %s, Count: %ld\n", (table + max_position)->word, max_count);
+    
     return 0;
 }
